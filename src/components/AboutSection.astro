@@ -1,0 +1,86 @@
+---
+// AboutSection.astro
+---
+
+<section class="bg-brand-cream py-24 px-4">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+      <!-- Text column -->
+      <div>
+        <span class="inline-block text-brand-orange font-semibold text-sm uppercase tracking-widest mb-4">
+          Quiénes somos
+        </span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-brand-brown leading-tight mb-8">
+          Una fe real.<br/>Una comunidad genuina.
+        </h2>
+        <!-- Exact copy as specified -->
+        <div class="space-y-5 text-gray-700 text-lg leading-relaxed">
+          <p>
+            Somos una iglesia cristiana en Córdoba que ama a Jesús y a las personas.
+            Vivimos una fe real y transformadora, no solo los domingos, sino cada día, en cada relación.
+          </p>
+          <p>
+            Nos reunimos para celebrar juntos y compartimos nuestras vidas en grupos células,
+            donde crecemos, sanamos y llevamos esperanza.
+          </p>
+          <p>
+            Soñamos con ver personas y familias restauradas, viviendo con propósito y libertad
+            el amor de Jesús.
+          </p>
+        </div>
+        <a
+          href="/primera-vez"
+          class="inline-flex items-center gap-2 mt-10 px-8 py-4 bg-brand-brown text-white rounded-full font-semibold text-base hover:bg-opacity-90 transition-all duration-200 shadow-sm hover:shadow-md"
+        >
+          Primera vez aquí
+          <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Image column -->
+      <!-- Replace /images/about-1.webp with a real photo of the community -->
+      <div class="relative">
+        <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-brand-beige">
+          <img
+            src="/images/about-1.jpg"
+            alt="Comunidad de Amor Cristiano"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+          <!-- Fallback gradient shown when image is missing -->
+          <div class="absolute inset-0 bg-gradient-to-br from-brand-beige to-brand-cream flex items-center justify-center" id="about-img-fallback">
+            <div class="text-center text-brand-brown/40 p-8">
+              <svg class="w-16 h-16 mx-auto mb-3 opacity-50" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+              <p class="text-sm font-medium">Foto de la comunidad</p>
+            </div>
+          </div>
+        </div>
+        <!-- Decorative badge -->
+        <div class="absolute -bottom-5 -left-5 bg-brand-orange text-white rounded-2xl p-5 shadow-lg hidden md:block">
+          <p class="font-extrabold text-3xl leading-none">+40</p>
+          <p class="text-xs font-medium text-orange-100 mt-1">años sirviendo<br/>a Córdoba</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  // Hide fallback overlay once the image loads successfully
+  const img = document.querySelector<HTMLImageElement>('img[alt="Comunidad de Amor Cristiano"]');
+  const fallback = document.getElementById('about-img-fallback');
+  if (img && fallback) {
+    if (img.complete && img.naturalWidth > 0) {
+      fallback.style.display = 'none';
+    } else {
+      img.addEventListener('load', () => { fallback.style.display = 'none'; });
+    }
+  }
+</script>

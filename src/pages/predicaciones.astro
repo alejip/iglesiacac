@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LatestSermon from '../components/LatestSermon.astro';
+import CTASection from '../components/CTASection.astro';
+
+const CHANNEL_URL = 'https://www.youtube.com/@iglesiaCAC';
+---
+
+<BaseLayout
+  title="Predicaciones — Comunidad de Amor Cristiano"
+  description="Escucha las predicaciones de Comunidad de Amor Cristiano en Córdoba. Mensajes bíblicos para tu vida."
+>
+
+  <!-- ── Page header ───────────────────────────────────── -->
+  <section class="bg-brand-brown pt-32 pb-20 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <span class="inline-block bg-brand-orange/20 text-brand-orange text-xs font-bold uppercase tracking-widest rounded-full px-4 py-2 mb-6">
+        Predicaciones
+      </span>
+      <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+        Palabra para tu vida
+      </h1>
+      <p class="text-xl text-white/75 leading-relaxed max-w-xl mx-auto">
+        Mensajes bíblicos prácticos y transformadores. Escúchalos cuando y donde quieras.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Latest sermon (fetched from RSS at build time) ── -->
+  <LatestSermon />
+
+  <!-- ── Dual-platform CTA ─────────────────────────────── -->
+  <section class="bg-white py-20 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="rounded-2xl bg-brand-cream p-10 md:p-12">
+
+        <h2 class="text-3xl font-extrabold text-brand-brown mb-3">
+          Ver o escuchar nuestras predicaciones
+        </h2>
+        <p class="text-gray-500 text-lg leading-relaxed mb-10 max-w-md mx-auto">
+          Puedes ver nuestras predicaciones en YouTube o escucharlas en Spotify.
+        </p>
+
+        <!-- Buttons: stacked on mobile, horizontal on desktop -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+
+          <!-- YouTube -->
+          <a
+            href="https://www.youtube.com/@iglesiaCAC"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl text-white font-semibold text-sm shadow-md transition-all duration-300 hover:scale-105"
+            style="background-color: #FF0000;"
+            onmouseover="this.style.backgroundColor='#cc0000'"
+            onmouseout="this.style.backgroundColor='#FF0000'"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-5 h-5 shrink-0" aria-hidden="true">
+              <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.8 15.5V8.5l6.4 3.5-6.4 3.5z"/>
+            </svg>
+            Ver en YouTube
+          </a>
+
+          <!-- Spotify -->
+          <a
+            href="https://open.spotify.com/show/53iFEeNCBKGXleuWzhFb8j"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl text-white font-semibold text-sm shadow-md transition-all duration-300 hover:scale-105"
+            style="background-color: #1DB954;"
+            onmouseover="this.style.backgroundColor='#169c46'"
+            onmouseout="this.style.backgroundColor='#1DB954'"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168 168" fill="white" class="w-5 h-5 shrink-0" aria-hidden="true">
+              <path d="M84 0a84 84 0 1 0 0 168A84 84 0 0 0 84 0zm38.7 121.4a5.3 5.3 0 0 1-7.3 1.8c-20-12.2-45.2-15-75-8.3a5.3 5.3 0 1 1-2.3-10.3c32.6-7.2 60.7-4 83 9.6a5.3 5.3 0 0 1 1.6 7.2zm10.4-23a6.6 6.6 0 0 1-9 2.2c-23-14-58-18-85-9.4a6.6 6.6 0 1 1-4-12.6c31.4-10 70.2-5.4 98 11.2a6.6 6.6 0 0 1 2 8.6zm1-24.2c-27.5-16.3-72.7-17.8-99-9.6a8 8 0 1 1-4.7-15.3c30.6-9.4 81.6-7.6 112 10.4a8 8 0 1 1-8.3 14.5z"/>
+            </svg>
+            Escuchar en Spotify
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────── -->
+  <CTASection
+    title="¿El mensaje te tocó?"
+    subtitle="Si quieres hablar sobre lo que Dios está haciendo en tu vida, estamos aquí."
+    buttonLabel="Escríbenos por WhatsApp"
+  />
+
+</BaseLayout>

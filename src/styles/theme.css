@@ -1,0 +1,48 @@
+/* ── Design Tokens ─────────────────────────────── */
+:root {
+  --color-white:  #ffffff;
+  --color-brown:  #401c14;
+  --color-red:    #98211e;
+  --color-orange: #e8501d;
+  --color-beige:  #ddd8d0;
+  --color-cream:  #f4f0e4;
+}
+
+/* ── Base ──────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  @apply font-sans bg-white text-gray-900;
+}
+
+/* ── Focus ─────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Selection ─────────────────────────────────── */
+::selection {
+  background-color: var(--color-orange);
+  color: white;
+}
+
+/* ── Scrollbar (webkit) ────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-beige);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brown);
+}

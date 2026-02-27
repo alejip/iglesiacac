@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTASection from '../components/CTASection.astro';
+
+const WA_JOVENES = 'https://wa.me/34658769351?text=Hola%2C%20me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre%20el%20grupo%20de%20j%C3%B3venes%20de%20Comunidad%20de%20Amor%20Cristiano.';
+const MAPS_LINK = 'https://maps.app.goo.gl/YVrcvGYhcTeFbdbw5';
+
+const values = [
+  {
+    title: 'Autenticidad',
+    description: 'Aquí no hay que aparentar. Puedes ser tú mismo, con tus dudas, tus luchas y tus sueños.',
+    icon: `<path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>`,
+  },
+  {
+    title: 'Propósito',
+    description: 'Creemos que eres joven con propósito. Juntos descubrimos el plan de Dios para nuestras vidas.',
+    icon: `<path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>`,
+  },
+  {
+    title: 'Comunidad',
+    description: 'Un grupo donde te conocen, te cuidan y te llaman cuando no apareces. No eres un número.',
+    icon: `<path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>`,
+  },
+  {
+    title: 'Fe real',
+    description: 'No hablamos de religión, sino de una relación con Jesús que transforma lo cotidiano.',
+    icon: `<path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>`,
+  },
+];
+---
+
+<BaseLayout
+  title="Jóvenes — Comunidad de Amor Cristiano"
+  description="El grupo de jóvenes de Comunidad de Amor Cristiano en Córdoba. Fe auténtica, comunidad real. Viernes a las 19:00."
+>
+
+  <!-- ── Hero ──────────────────────────────────────────── -->
+  <section class="relative bg-brand-brown overflow-hidden pt-32 pb-24 px-4">
+    <!-- Decorative background shape -->
+    <div class="absolute top-0 right-0 w-1/2 h-full opacity-10">
+      <!-- Replace with /images/jovenes.webp -->
+      <img src="/images/jovenes.webp" alt="" role="presentation" class="w-full h-full object-cover" />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-brown via-brand-brown/90 to-transparent"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto">
+      <span class="inline-block bg-brand-orange/20 text-brand-orange text-xs font-bold uppercase tracking-widest rounded-full px-4 py-2 mb-6">
+        Jóvenes · Viernes 19:00
+      </span>
+      <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6 max-w-2xl">
+        Joven, tu fe puede ser real.
+      </h1>
+      <p class="text-xl text-white/75 leading-relaxed max-w-xl mb-10">
+        Somos jóvenes que creemos que la fe no es aburrida ni anticuada. Nos reunimos cada viernes para adorar, aprender y vivir la aventura de seguir a Jesús juntos.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a
+          href={WA_JOVENES}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-brand-orange text-white rounded-full font-bold text-base hover:bg-orange-600 transition-all duration-200 shadow-lg"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Únete al grupo
+        </a>
+        <a
+          href={MAPS_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-full font-bold text-base hover:bg-white/20 transition-all duration-200"
+        >
+          Cómo llegar
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Meeting info banner ────────────────────────────── -->
+  <section class="bg-brand-orange px-4 py-8">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6 text-white text-center sm:text-left">
+      <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+        </svg>
+        <span class="font-bold text-lg">Viernes · 19:00</span>
+      </div>
+      <span class="hidden sm:block text-white/40">|</span>
+      <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+        </svg>
+        <span class="font-bold text-lg">C/ Sor Ángela de la Cruz 6, Córdoba</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Values ─────────────────────────────────────────── -->
+  <section class="bg-brand-cream py-24 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14">
+        <span class="inline-block text-brand-orange font-semibold text-sm uppercase tracking-widest mb-3">
+          Nuestros valores
+        </span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-brand-brown leading-tight">
+          Lo que nos mueve
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {values.map(v => (
+          <div class="bg-white rounded-2xl p-7 flex flex-col gap-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+            <div class="w-12 h-12 rounded-2xl bg-brand-cream flex items-center justify-center">
+              <svg class="w-6 h-6 text-brand-orange" viewBox="0 0 20 20" fill="currentColor"
+                set:html={v.icon} />
+            </div>
+            <h3 class="font-extrabold text-brand-brown text-lg">{v.title}</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">{v.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────── -->
+  <CTASection
+    title="¿Quieres venir un viernes?"
+    subtitle="Escríbenos y te contamos todo. Sin compromisos, solo ven y mira si encajas."
+    buttonLabel="Escribir al grupo de jóvenes"
+    buttonHref={WA_JOVENES}
+  />
+
+</BaseLayout>

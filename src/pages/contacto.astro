@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const WA_LINK = 'https://wa.me/34658769351?text=Hola%20Comunidad%20de%20Amor%20Cristiano%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20info%20para%20visitaros.';
+const MAPS_LINK = 'https://maps.app.goo.gl/YVrcvGYhcTeFbdbw5';
+---
+
+<BaseLayout
+  title="Contacto — Comunidad de Amor Cristiano"
+  description="Contacta con Comunidad de Amor Cristiano en Córdoba. Dirección, teléfono, WhatsApp y horarios de oficina."
+>
+
+  <!-- ── Page header ───────────────────────────────────── -->
+  <section class="bg-brand-brown pt-32 pb-20 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <span class="inline-block bg-brand-orange/20 text-brand-orange text-xs font-bold uppercase tracking-widest rounded-full px-4 py-2 mb-6">
+        Contacto
+      </span>
+      <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+        Estamos aquí para ti
+      </h1>
+      <p class="text-xl text-white/75 leading-relaxed max-w-xl mx-auto">
+        Escríbenos, llámanos o visítanos. Estaremos encantados de conocerte.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Contact info grid ─────────────────────────────── -->
+  <section class="bg-brand-cream py-20 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Address -->
+        <div class="bg-white rounded-2xl p-8 flex flex-col gap-5 shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-brand-cream flex items-center justify-center">
+            <svg class="w-6 h-6 text-brand-orange" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="font-bold text-brand-brown text-sm uppercase tracking-widest mb-2">Dirección</h2>
+            <address class="not-italic text-gray-600 leading-relaxed">
+              C/ Sor Ángela de la Cruz 6<br/>
+              14006 Córdoba, España
+            </address>
+          </div>
+          <a
+            href={MAPS_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-auto inline-flex items-center gap-2 px-6 py-3 bg-brand-orange text-white rounded-full font-semibold text-sm hover:bg-orange-600 transition-colors duration-200"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+            </svg>
+            Cómo llegar
+          </a>
+        </div>
+
+        <!-- Phone -->
+        <div class="bg-white rounded-2xl p-8 flex flex-col gap-5 shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-brand-cream flex items-center justify-center">
+            <svg class="w-6 h-6 text-brand-orange" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="font-bold text-brand-brown text-sm uppercase tracking-widest mb-2">Teléfono</h2>
+            <a href="tel:+34658769351" class="text-2xl font-extrabold text-brand-brown hover:text-brand-orange transition-colors duration-200">
+              658 76 93 51
+            </a>
+            <div class="mt-3 space-y-1">
+              <p class="text-gray-500 text-sm flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-brand-orange" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                </svg>
+                Oficina: L–V · 09:00–14:00
+              </p>
+            </div>
+          </div>
+          <a
+            href="tel:+34658769351"
+            class="mt-auto inline-flex items-center gap-2 px-6 py-3 border border-brand-brown text-brand-brown rounded-full font-semibold text-sm hover:bg-brand-cream transition-colors duration-200"
+          >
+            Llamar ahora
+          </a>
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="bg-white rounded-2xl p-8 flex flex-col gap-5 shadow-sm hover:shadow-md transition-shadow duration-300 md:col-span-2 lg:col-span-1">
+          <div class="w-12 h-12 rounded-2xl bg-green-50 flex items-center justify-center">
+            <svg class="w-6 h-6 text-green-600" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="font-bold text-brand-brown text-sm uppercase tracking-widest mb-2">WhatsApp</h2>
+            <p class="text-gray-600 leading-relaxed text-sm">
+              La forma más rápida de contactarnos. Responderemos en breve.
+            </p>
+          </div>
+          <a
+            href={WA_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-full font-semibold text-sm hover:bg-green-500 transition-colors duration-200"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Abrir WhatsApp
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Office hours + Map embed ──────────────────────── -->
+  <section class="bg-white py-20 px-4">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+      <!-- Office hours -->
+      <div>
+        <h2 class="text-3xl font-extrabold text-brand-brown mb-8">Horario de oficina</h2>
+        <div class="space-y-4">
+          {['Lunes','Martes','Miércoles','Jueves','Viernes'].map(day => (
+            <div class="flex items-center justify-between py-4 border-b border-gray-100 last:border-0">
+              <span class="font-semibold text-brand-brown">{day}</span>
+              <span class="text-gray-600 font-medium">09:00 – 14:00</span>
+            </div>
+          ))}
+          {['Sábado','Domingo'].map(day => (
+            <div class="flex items-center justify-between py-4 border-b border-gray-100 last:border-0">
+              <span class="font-semibold text-gray-400">{day}</span>
+              <span class="text-gray-400">Cerrado</span>
+            </div>
+          ))}
+        </div>
+        <p class="mt-6 text-sm text-gray-500">
+          Para reuniones fuera de este horario, escríbenos por WhatsApp y lo gestionamos.
+        </p>
+      </div>
+
+      <!-- Map embed placeholder -->
+      <div>
+        <h2 class="text-3xl font-extrabold text-brand-brown mb-8">Cómo llegar</h2>
+        <!-- Google Maps embed iframe — replace src with real embed URL if desired -->
+        <div class="rounded-2xl overflow-hidden bg-brand-cream h-72 flex flex-col items-center justify-center gap-4 text-brand-brown/40">
+          <svg class="w-12 h-12 opacity-40" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+          </svg>
+          <p class="text-sm font-medium text-center px-4 opacity-50">
+            C/ Sor Ángela de la Cruz 6, 14006 Córdoba
+          </p>
+          <a
+            href={MAPS_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-6 py-2.5 bg-brand-orange text-white rounded-full font-semibold text-sm hover:bg-orange-600 transition-colors duration-200 opacity-100"
+          >
+            Ver en Google Maps
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>

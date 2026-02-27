@@ -1,0 +1,279 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTASection from '../components/CTASection.astro';
+
+const WA_LINK = 'https://wa.me/34658769351?text=Hola%20Comunidad%20de%20Amor%20Cristiano%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20info%20para%20visitaros.';
+const MAPS_LINK = 'https://maps.app.goo.gl/YVrcvGYhcTeFbdbw5';
+
+const expectItems = [
+  {
+    title: 'Adoración auténtica',
+    description: 'Música que expresa fe real. No hace falta que conozcas las canciones, solo que vengas con el corazón abierto.',
+    icon: `<path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"/>`,
+  },
+  {
+    title: 'Mensaje práctico',
+    description: 'Enseñanzas bíblicas claras y relevantes para la vida de hoy. Nada aburrido ni complicado.',
+    icon: `<path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>`,
+  },
+  {
+    title: 'Bienvenida cálida',
+    description: 'Habrá alguien esperándote. Recibirás una bienvenida de personas que genuinamente quieren conocerte.',
+    icon: `<path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>`,
+  },
+  {
+    title: 'Niños bien cuidados',
+    description: 'Tenemos programa para niños en paralelo. Tus hijos también disfrutarán de su reunión.',
+    icon: `<path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>`,
+  },
+];
+
+const faq = [
+  {
+    q: '¿Cómo es el ambiente?',
+    a: 'Informal y amigable. Ven como eres, con ropa cómoda. No hay códigos de vestimenta ni protocolo especial. Lo que más importa es que estés cómodo.',
+  },
+  {
+    q: '¿Hay parking o accesibilidad?',
+    a: 'Hay zona de aparcamiento en las inmediaciones. El local es accesible para personas con movilidad reducida. Si tienes alguna necesidad especial, escríbenos antes y preparamos todo.',
+  },
+  {
+    q: '¿Cuánto dura la reunión?',
+    a: 'Las reuniones duran aproximadamente 90 minutos, que incluyen adoración, el mensaje y un momento de conexión. Tiempo suficiente para disfrutar sin que se haga largo.',
+  },
+];
+---
+
+<BaseLayout
+  title="Primera vez aquí — Comunidad de Amor Cristiano"
+  description="Planifica tu primera visita a Comunidad de Amor Cristiano en Córdoba. Te esperamos con los brazos abiertos."
+>
+
+  <!-- ── Hero ──────────────────────────────────────────── -->
+  <section class="bg-brand-brown pt-32 pb-20 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <span class="inline-block bg-brand-orange/20 text-brand-orange text-xs font-bold uppercase tracking-widest rounded-full px-4 py-2 mb-6">
+        Primera vez aquí
+      </span>
+      <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+        Bienvenido.<br/>Aquí eres esperado.
+      </h1>
+      <p class="text-xl text-white/75 leading-relaxed max-w-xl mx-auto mb-10">
+        Sabemos que venir a una iglesia por primera vez puede generar dudas. Aquí tienes todo lo que necesitas saber para llegar con confianza.
+      </p>
+      <a
+        href={MAPS_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-8 py-4 bg-brand-orange text-white rounded-full font-bold text-base hover:bg-orange-600 transition-all duration-200 shadow-lg"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+        </svg>
+        Ver cómo llegar
+      </a>
+    </div>
+  </section>
+
+  <!-- ── Qué puedes esperar ─────────────────────────────── -->
+  <section class="bg-brand-cream py-24 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14">
+        <span class="inline-block text-brand-orange font-semibold text-sm uppercase tracking-widest mb-3">
+          Qué puedes esperar
+        </span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-brand-brown leading-tight">
+          Preparamos todo para ti
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {expectItems.map(item => (
+          <div class="rounded-2xl bg-white p-7 flex flex-col gap-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+            <div class="w-12 h-12 rounded-2xl bg-brand-cream flex items-center justify-center">
+              <svg class="w-6 h-6 text-brand-orange" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+                set:html={item.icon} />
+            </div>
+            <h3 class="font-extrabold text-brand-brown text-base">{item.title}</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Horarios y ubicación ───────────────────────────── -->
+  <section class="bg-white py-24 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <span class="inline-block text-brand-orange font-semibold text-sm uppercase tracking-widest mb-4">
+        Cuándo y dónde
+      </span>
+      <h2 class="text-4xl font-extrabold text-brand-brown mb-12">Horarios y ubicación</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
+        <!-- Meeting times -->
+        <div class="rounded-2xl bg-brand-cream p-8 text-left">
+          <h3 class="font-bold text-brand-brown text-sm uppercase tracking-widest mb-5">Reuniones</h3>
+          <ul class="space-y-4">
+            <li class="flex justify-between items-center py-3 border-b border-brand-beige last:border-0">
+              <div>
+                <p class="font-bold text-brand-brown text-sm">Reunión de Oración</p>
+                <p class="text-gray-500 text-xs mt-0.5">Jueves</p>
+              </div>
+              <span class="font-extrabold text-brand-orange text-xl">19:30</span>
+            </li>
+            <li class="flex justify-between items-center py-3 border-b border-brand-beige last:border-0">
+              <div>
+                <p class="font-bold text-brand-brown text-sm">Jóvenes</p>
+                <p class="text-gray-500 text-xs mt-0.5">Viernes</p>
+              </div>
+              <span class="font-extrabold text-brand-orange text-xl">19:00</span>
+            </li>
+            <li class="flex justify-between items-center py-3 border-b border-brand-beige last:border-0">
+              <div>
+                <p class="font-bold text-brand-brown text-sm">Domingo en Casa</p>
+                <p class="text-gray-500 text-xs mt-0.5">Domingo</p>
+              </div>
+              <span class="font-extrabold text-brand-orange text-xl">11:30</span>
+            </li>
+            <li class="flex justify-between items-center py-3">
+              <div>
+                <p class="font-bold text-brand-brown text-sm">Domingo en Casa</p>
+                <p class="text-gray-500 text-xs mt-0.5">Domingo</p>
+              </div>
+              <span class="font-extrabold text-brand-orange text-xl">19:30</span>
+            </li>
+          </ul>
+        </div>
+        <!-- Location -->
+        <div class="rounded-2xl bg-brand-cream p-8 text-left flex flex-col gap-4">
+          <h3 class="font-bold text-brand-brown text-sm uppercase tracking-widest">Dónde estamos</h3>
+          <address class="not-italic flex-1">
+            <p class="font-extrabold text-brand-brown text-xl leading-tight mb-2">
+              C/ Sor Ángela de la Cruz 6
+            </p>
+            <p class="text-gray-500 text-base">14006 Córdoba, España</p>
+          </address>
+          <div class="space-y-3 mt-auto">
+            <a
+              href={MAPS_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-center gap-2 w-full px-5 py-3 bg-brand-orange text-white rounded-full font-semibold text-sm hover:bg-orange-600 transition-colors duration-200"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+              </svg>
+              Abrir en Google Maps
+            </a>
+            <a
+              href={WA_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-center gap-2 w-full px-5 py-3 border border-brand-brown text-brand-brown rounded-full font-semibold text-sm hover:bg-brand-cream transition-colors duration-200"
+            >
+              Preguntar por WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ¿Vienes con niños? ─────────────────────────────── -->
+  <section id="ninos" class="bg-brand-cream py-24 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="inline-block text-brand-orange font-semibold text-sm uppercase tracking-widest mb-4">
+            Familias
+          </span>
+          <h2 class="text-4xl font-extrabold text-brand-brown leading-tight mb-6">
+            ¿Vienes con niños?
+          </h2>
+          <p class="text-gray-600 text-lg leading-relaxed mb-5">
+            No te preocupes. Tenemos un ministerio de niños donde los más pequeños de la casa aprenden sobre Jesús de manera divertida y segura, con maestros dedicados.
+          </p>
+          <p class="text-gray-600 leading-relaxed">
+            Así tú puedes disfrutar de la reunión con tranquilidad, sabiendo que ellos están en buenas manos.
+          </p>
+          <a
+            href={WA_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 mt-8 px-7 py-3.5 bg-brand-brown text-white rounded-full font-semibold text-sm hover:bg-opacity-90 transition-colors duration-200"
+          >
+            Consultar sobre el ministerio de niños
+          </a>
+        </div>
+        <div class="rounded-2xl bg-brand-beige aspect-square flex items-center justify-center text-brand-brown/30 overflow-hidden">
+          <!-- Replace with /images/ninos.webp -->
+          <div class="text-center p-8">
+            <svg class="w-20 h-20 mx-auto mb-3 opacity-30" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <p class="text-sm font-medium opacity-50">Foto ministerio de niños</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ───────────────────────────────────────────── -->
+  <section class="bg-white py-24 px-4">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-14">
+        <span class="inline-block text-brand-orange font-semibold text-sm uppercase tracking-widest mb-3">
+          Preguntas frecuentes
+        </span>
+        <h2 class="text-4xl font-extrabold text-brand-brown leading-tight">
+          Resolvemos tus dudas
+        </h2>
+      </div>
+      <div class="space-y-4">
+        {faq.map((item, i) => (
+          <details
+            class="group rounded-2xl border border-gray-100 overflow-hidden"
+            open={i === 0}
+          >
+            <summary class="flex items-center justify-between gap-4 px-7 py-5 cursor-pointer select-none list-none hover:bg-brand-cream transition-colors duration-200">
+              <span class="font-bold text-brand-brown text-base">{item.q}</span>
+              <svg
+                class="w-5 h-5 text-brand-orange shrink-0 transition-transform duration-300 group-open:rotate-180"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+            </summary>
+            <div class="px-7 pb-6 pt-2 text-gray-600 text-base leading-relaxed border-t border-gray-50">
+              {item.a}
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <p class="text-gray-500 mb-5">¿Tienes más preguntas?</p>
+        <a
+          href={WA_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-[#25D366] text-white rounded-full font-bold text-sm hover:bg-green-500 transition-colors duration-200"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Escríbenos por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────── -->
+  <CTASection
+    title="¿Listo para tu primera visita?"
+    subtitle="No necesitas saber nada de la Biblia ni tener todo resuelto en tu vida. Ven tal como eres."
+    buttonLabel="Planificar mi visita por WhatsApp"
+  />
+
+</BaseLayout>
