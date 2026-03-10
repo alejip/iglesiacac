@@ -11,10 +11,74 @@ interface Props {
 }
 
 const {
-  title = 'Comunidad de Amor Cristiano — Córdoba',
-  description = 'Somos una iglesia cristiana en Córdoba que ama a Jesús y a las personas. Ven, te esperamos.',
-  image = '/images/og-default.webp',
+  title = 'Comunidad de Amor Cristiano — Iglesia en Córdoba',
+  description = 'Somos una iglesia cristiana en Córdoba que ama a Jesús y a las personas. Vivimos una fe real y transformadora cada día.',
+  image = '/images/og-default.svg',
 } = Astro.props;
+
+const SITE_URL = 'https://iglesiacac.es';
+const canonicalURL = new URL(Astro.url.pathname, SITE_URL).href;
+const ogImage = image.startsWith('http') ? image : `${SITE_URL}${image}`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Church',
+  name: 'Comunidad de Amor Cristiano',
+  alternateName: 'Iglesia CAC Córdoba',
+  url: SITE_URL,
+  logo: `${SITE_URL}/images/logo-llama.png`,
+  image: `${SITE_URL}/images/og-default.svg`,
+  description: 'Iglesia cristiana en Córdoba que ama a Jesús y a las personas. Fe real y transformadora, grupos célula y misiones.',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'C/ Sor Ángela de la Cruz 6',
+    addressLocality: 'Córdoba',
+    postalCode: '14006',
+    addressCountry: 'ES',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 37.8882,
+    longitude: -4.7794,
+  },
+  telephone: '+34658769351',
+  email: 'info@iglesiacac.es',
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Thursday',
+      opens: '19:30',
+      closes: '21:00',
+      name: 'Reunión de Oración',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Friday',
+      opens: '19:00',
+      closes: '21:00',
+      name: 'Jóvenes',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Sunday',
+      opens: '11:30',
+      closes: '13:00',
+      name: 'Domingo en Casa',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Sunday',
+      opens: '19:00',
+      closes: '21:00',
+      name: 'Domingo en Casa',
+    },
+  ],
+  sameAs: [
+    'https://www.youtube.com/@iglesiaCAC',
+    'https://www.instagram.com/IglesiaCAC',
+    'https://www.facebook.com/IglesiaCAC',
+  ],
+};
 ---
 <!doctype html>
 <html lang="es">
@@ -22,15 +86,36 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#401c14" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
-    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Comunidad de Amor Cristiano" />
+
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <title>{title}</title>
+
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/images/logo-llama.png" />
+
     <!-- Fonts: Inter + Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,6 +123,9 @@ const {
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <Header />
