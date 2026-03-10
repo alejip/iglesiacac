@@ -116,20 +116,36 @@ const currentYear = new Date().getFullYear();
 
     </div>
 
-    <!-- Divider + copyright -->
+    <!-- Divider + copyright + legal links -->
     <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
       <p class="text-white/40 text-xs text-center sm:text-left">
         © {currentYear} Comunidad de Amor Cristiano · Córdoba, España
       </p>
-      <a
-        href="https://wa.me/34658769351?text=Hola%20Comunidad%20de%20Amor%20Cristiano%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20info%20para%20visitaros."
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-white/40 hover:text-brand-orange text-xs transition-colors duration-200"
-      >
-        Escríbenos por WhatsApp
-      </a>
+      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+        <a href="/aviso-legal" class="text-white/40 hover:text-brand-orange text-xs transition-colors duration-200">Aviso Legal</a>
+        <span class="text-white/20 text-xs">·</span>
+        <a href="/politica-de-privacidad" class="text-white/40 hover:text-brand-orange text-xs transition-colors duration-200">Privacidad</a>
+        <span class="text-white/20 text-xs">·</span>
+        <a href="/politica-de-cookies" class="text-white/40 hover:text-brand-orange text-xs transition-colors duration-200">Cookies</a>
+        <span class="text-white/20 text-xs">·</span>
+        <button id="footer-cookie-settings" class="text-white/40 hover:text-brand-orange text-xs transition-colors duration-200 cursor-pointer">Gestionar cookies</button>
+        <span class="text-white/20 text-xs">·</span>
+        <a
+          href="https://wa.me/34658769351?text=Hola%20Comunidad%20de%20Amor%20Cristiano%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20info%20para%20visitaros."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-white/40 hover:text-brand-orange text-xs transition-colors duration-200"
+        >
+          WhatsApp
+        </a>
+      </div>
     </div>
 
   </div>
 </footer>
+
+<script>
+  document.getElementById('footer-cookie-settings')?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('cac:open-cookie-settings'));
+  });
+</script>

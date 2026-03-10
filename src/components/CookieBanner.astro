@@ -1,0 +1,291 @@
+---
+// CookieBanner.astro — RGPD/GDPR compliant cookie consent banner
+// Consent stored in localStorage under key 'cac_cookie_consent'
+// Categories: { media: boolean }  (necessary always granted)
+---
+
+<!-- Banner (hidden by default, shown by JS if no consent stored) -->
+<div
+  id="cookie-banner"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Preferencias de privacidad"
+  class="fixed bottom-0 left-0 right-0 z-50 p-4 hidden"
+>
+  <div class="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl shadow-2xl p-5 md:p-6">
+    <div class="flex flex-col md:flex-row md:items-center gap-4">
+
+      <!-- Text -->
+      <div class="flex-1 min-w-0">
+        <p class="font-extrabold text-brand-brown text-sm mb-1">Este sitio usa cookies</p>
+        <p class="text-gray-500 text-xs leading-relaxed">
+          Usamos cookies propias para guardar sus preferencias y cookies de terceros (YouTube) para mostrar vídeos. Puede aceptarlas, rechazarlas o
+          <button id="cookie-manage-btn" class="text-brand-orange underline hover:no-underline font-semibold">gestionar sus preferencias</button>.
+          Más info en nuestra <a href="/politica-de-cookies" class="text-brand-orange underline hover:no-underline">Política de Cookies</a>.
+        </p>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex flex-wrap gap-2 shrink-0">
+        <button
+          id="cookie-reject-btn"
+          class="px-4 py-2 rounded-full border border-gray-300 text-gray-600 text-xs font-semibold hover:border-gray-400 hover:bg-gray-50 transition-colors duration-200"
+        >
+          Rechazar todo
+        </button>
+        <button
+          id="cookie-accept-btn"
+          class="px-4 py-2 rounded-full bg-brand-brown text-white text-xs font-semibold hover:bg-opacity-90 transition-colors duration-200"
+        >
+          Aceptar todo
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Preferences modal -->
+<div
+  id="cookie-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Gestionar preferencias de cookies"
+  class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+>
+  <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 md:p-8 max-h-[90vh] overflow-y-auto">
+
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="font-extrabold text-brand-brown text-lg">Gestionar cookies</h2>
+      <button id="cookie-modal-close" aria-label="Cerrar" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <p class="text-gray-500 text-sm mb-6 leading-relaxed">
+      A continuación puede seleccionar qué categorías de cookies acepta. Las cookies estrictamente necesarias no pueden desactivarse ya que son imprescindibles para el funcionamiento del sitio.
+    </p>
+
+    <!-- Category: Necesarias -->
+    <div class="border border-gray-100 rounded-xl p-4 mb-3">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="font-bold text-brand-brown text-sm">Estrictamente necesarias</p>
+          <p class="text-gray-500 text-xs mt-1">Guardan sus preferencias de privacidad. No se pueden desactivar.</p>
+        </div>
+        <!-- Always-on toggle (non-interactive) -->
+        <div class="w-10 h-6 bg-green-500 rounded-full flex items-center justify-end px-1 cursor-not-allowed opacity-80">
+          <div class="w-4 h-4 bg-white rounded-full"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category: Medios -->
+    <div class="border border-gray-100 rounded-xl p-4 mb-6">
+      <div class="flex items-center justify-between">
+        <div class="flex-1 pr-4">
+          <p class="font-bold text-brand-brown text-sm">Contenido multimedia (YouTube)</p>
+          <p class="text-gray-500 text-xs mt-1">Permiten cargar vídeos de YouTube directamente en la web. YouTube puede usar cookies para analítica y publicidad.</p>
+        </div>
+        <!-- Toggle -->
+        <button
+          id="media-toggle"
+          role="switch"
+          aria-checked="false"
+          aria-label="Activar cookies de medios"
+          class="relative w-10 h-6 rounded-full transition-colors duration-200 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 shrink-0"
+        >
+          <span class="toggle-knob absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow transition-transform duration-200"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex gap-3">
+      <button
+        id="cookie-save-btn"
+        class="flex-1 px-4 py-3 bg-brand-brown text-white rounded-full text-sm font-semibold hover:bg-opacity-90 transition-colors duration-200"
+      >
+        Guardar preferencias
+      </button>
+      <button
+        id="cookie-accept-all-modal-btn"
+        class="flex-1 px-4 py-3 bg-brand-orange text-white rounded-full text-sm font-semibold hover:bg-opacity-90 transition-colors duration-200"
+      >
+        Aceptar todo
+      </button>
+    </div>
+
+    <p class="text-gray-400 text-xs text-center mt-4">
+      Puede cambiar sus preferencias en cualquier momento desde la <a href="/politica-de-cookies" class="underline hover:text-brand-orange">Política de Cookies</a>.
+    </p>
+
+  </div>
+</div>
+
+<!-- Floating privacy button (shown after consent is given) -->
+<button
+  id="cookie-settings-float"
+  aria-label="Gestionar preferencias de cookies"
+  title="Privacidad"
+  class="fixed bottom-4 left-4 z-40 hidden w-9 h-9 bg-white border border-gray-200 rounded-full shadow-md items-center justify-center hover:bg-gray-50 transition-colors duration-200"
+>
+  <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+  </svg>
+</button>
+
+<style>
+  #media-toggle[aria-checked="true"] {
+    background-color: #c05b28; /* brand-orange approx */
+  }
+  #media-toggle[aria-checked="true"] .toggle-knob {
+    transform: translateX(16px);
+  }
+  #cookie-modal.flex {
+    display: flex;
+  }
+</style>
+
+<script>
+  const CONSENT_KEY = 'cac_cookie_consent';
+  const CONSENT_VERSION = 1;
+  const CONSENT_DURATION_MS = 180 * 24 * 60 * 60 * 1000; // 6 months
+
+  type ConsentData = {
+    v: number;
+    ts: number;
+    media: boolean;
+  };
+
+  function getConsent(): ConsentData | null {
+    try {
+      const raw = localStorage.getItem(CONSENT_KEY);
+      if (!raw) return null;
+      const data: ConsentData = JSON.parse(raw);
+      if (data.v !== CONSENT_VERSION) return null;
+      if (Date.now() - data.ts > CONSENT_DURATION_MS) return null;
+      return data;
+    } catch {
+      return null;
+    }
+  }
+
+  function saveConsent(media: boolean) {
+    const data: ConsentData = { v: CONSENT_VERSION, ts: Date.now(), media };
+    localStorage.setItem(CONSENT_KEY, JSON.stringify(data));
+  }
+
+  function applyConsent(media: boolean) {
+    if (media) {
+      // Enable YouTube iframes: swap data-yt-src → src
+      document.querySelectorAll<HTMLIFrameElement>('iframe[data-yt-src]').forEach(iframe => {
+        iframe.src = iframe.dataset.ytSrc!;
+        iframe.removeAttribute('data-yt-src');
+      });
+    }
+  }
+
+  function hideBanner() {
+    const banner = document.getElementById('cookie-banner');
+    if (banner) banner.classList.add('hidden');
+    const floatBtn = document.getElementById('cookie-settings-float');
+    if (floatBtn) floatBtn.classList.remove('hidden');
+    floatBtn?.classList.add('flex');
+  }
+
+  function showBanner() {
+    const banner = document.getElementById('cookie-banner');
+    if (banner) banner.classList.remove('hidden');
+  }
+
+  function openModal() {
+    const modal = document.getElementById('cookie-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+    // Sync toggle state with stored consent
+    const consent = getConsent();
+    const toggle = document.getElementById('media-toggle') as HTMLButtonElement | null;
+    if (toggle) {
+      const checked = consent?.media ?? false;
+      toggle.setAttribute('aria-checked', String(checked));
+    }
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('cookie-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  }
+
+  // Accept all
+  function acceptAll() {
+    saveConsent(true);
+    applyConsent(true);
+    hideBanner();
+    closeModal();
+  }
+
+  // Reject all
+  function rejectAll() {
+    saveConsent(false);
+    applyConsent(false);
+    hideBanner();
+    closeModal();
+  }
+
+  // Save custom preferences
+  function savePreferences() {
+    const toggle = document.getElementById('media-toggle') as HTMLButtonElement | null;
+    const media = toggle?.getAttribute('aria-checked') === 'true';
+    saveConsent(media);
+    applyConsent(media);
+    hideBanner();
+    closeModal();
+  }
+
+  // Init on DOM ready
+  document.addEventListener('DOMContentLoaded', () => {
+    const consent = getConsent();
+
+    if (!consent) {
+      showBanner();
+    } else {
+      applyConsent(consent.media);
+      hideBanner();
+    }
+
+    document.getElementById('cookie-accept-btn')?.addEventListener('click', acceptAll);
+    document.getElementById('cookie-reject-btn')?.addEventListener('click', rejectAll);
+    document.getElementById('cookie-manage-btn')?.addEventListener('click', openModal);
+    document.getElementById('cookie-modal-close')?.addEventListener('click', closeModal);
+    document.getElementById('cookie-save-btn')?.addEventListener('click', savePreferences);
+    document.getElementById('cookie-accept-all-modal-btn')?.addEventListener('click', acceptAll);
+    document.getElementById('cookie-settings-float')?.addEventListener('click', openModal);
+
+    // Close modal on backdrop click
+    document.getElementById('cookie-modal')?.addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeModal();
+    });
+
+    // Toggle button
+    document.getElementById('media-toggle')?.addEventListener('click', () => {
+      const toggle = document.getElementById('media-toggle')!;
+      const current = toggle.getAttribute('aria-checked') === 'true';
+      toggle.setAttribute('aria-checked', String(!current));
+    });
+
+    // Keyboard: close modal on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Listen for external open event (from cookie policy page button)
+    window.addEventListener('cac:open-cookie-settings', openModal);
+  });
+</script>
