@@ -23,18 +23,19 @@ const drawerLogo = LOGO_POSITIVE;
 const nameColor = isHeroOverlay ? 'text-white' : 'text-brand-brown';
 
 const navLinks = [
-  { href: '/',              label: 'Inicio' },
-  { href: '/primera-vez',   label: 'Primera vez aquí' },
-  { href: '/#horarios',     label: 'Horarios' },
-  { href: '/predicaciones', label: 'Predicaciones' },
-  { href: '/jovenes',       label: 'Jóvenes' },
-  { href: '/contacto',      label: 'Contacto' },
+  { href: '/',                label: 'Inicio' },
+  { href: '/primera-vez',     label: 'Primera vez aquí' },
+  { href: '/#horarios',       label: 'Horarios' },
+  { href: '/predicaciones',   label: 'Predicaciones' },
+  { href: '/jovenes',         label: 'Jóvenes' },
+  { href: '/contacto',        label: 'Contacto' },
+  { href: '/transparencia',   label: 'Transparencia' },
 ];
 ---
 
 <!-- ── Sticky Pill Navbar ───────────────────────────── -->
 <header class="fixed top-3 left-0 right-0 z-50 px-4">
-  <div class="max-w-5xl mx-auto bg-white/70 backdrop-blur-md rounded-full shadow-lg border border-gray-100 px-3 py-2 flex items-center justify-between gap-4">
+  <div class="max-w-[1400px] mx-auto bg-white/70 backdrop-blur-md rounded-full shadow-lg border border-gray-100 px-3 py-2 flex items-center justify-between gap-2">
 
     <!-- Logo + Name -->
     <a href="/" class="flex items-center gap-3 flex-none group" aria-label="Inicio">
@@ -47,20 +48,20 @@ const navLinks = [
       />
       <!-- Church name: two lines on xl, hidden on smaller -->
       <div
-        class={`block leading-tight ${nameColor}`}
-        style="font-family: 'Plus Jakarta Sans', sans-serif;"
+        class={`leading-tight ${nameColor}`}
+        style="font-family: 'MuseoSans', 'Plus Jakarta Sans', sans-serif;"
       >
-        <span class="block font-extrabold text-[11px] tracking-wide uppercase">Comunidad de</span>
-        <span class="block font-extrabold text-[11px] tracking-wide uppercase">Amor Cristiano</span>
+        <span class="block font-bold text-[13px] tracking-wide">Comunidad de</span>
+        <span class="block font-bold text-[13px] tracking-wide">Amor Cristiano</span>
       </div>
     </a>
 
     <!-- Nav Links — desktop only -->
-    <nav class="hidden lg:flex items-center gap-0.5 flex-1 justify-center" aria-label="Navegación principal">
+    <nav class="hidden xl:flex items-center gap-0 flex-1 justify-center" aria-label="Navegación principal">
       {navLinks.map(link => (
         <a
           href={link.href}
-          class="px-3 py-2 text-[13px] font-medium text-gray-600 hover:text-brand-orange rounded-full hover:bg-brand-cream transition-all duration-200 whitespace-nowrap"
+          class="px-2.5 py-2 text-[13px] font-medium text-gray-600 hover:text-brand-orange rounded-full hover:bg-brand-cream transition-all duration-200 whitespace-nowrap"
         >
           {link.label}
         </a>
@@ -68,7 +69,7 @@ const navLinks = [
     </nav>
 
     <!-- CTA Buttons — desktop only -->
-    <div class="hidden lg:flex items-center gap-2 flex-none">
+    <div class="hidden xl:flex items-center gap-2 flex-none">
       <a
         href="/donar"
         class="px-4 py-2 text-[13px] font-semibold border border-brand-brown text-brand-brown rounded-full hover:bg-brand-cream transition-all duration-200 whitespace-nowrap"
@@ -86,7 +87,7 @@ const navLinks = [
     <!-- Mobile hamburger -->
     <button
       id="menu-toggle"
-      class="lg:hidden p-2 rounded-full text-brand-brown hover:bg-brand-cream transition-colors duration-200"
+      class="xl:hidden p-2 rounded-full text-brand-brown hover:bg-brand-cream transition-colors duration-200"
       aria-label="Abrir menú de navegación"
       aria-expanded="false"
     >
@@ -121,9 +122,9 @@ const navLinks = [
         alt="Logo Comunidad de Amor Cristiano"
         class="h-8 w-auto object-contain shrink-0"
       />
-      <div class="leading-tight text-brand-brown" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-        <span class="block font-extrabold text-[10px] tracking-wide uppercase">Comunidad de</span>
-        <span class="block font-extrabold text-[10px] tracking-wide uppercase">Amor Cristiano</span>
+      <div class="leading-tight text-brand-brown" style="font-family: 'MuseoSans', 'Plus Jakarta Sans', sans-serif;">
+        <span class="block font-bold text-[13px] tracking-wide">Comunidad de</span>
+        <span class="block font-bold text-[13px] tracking-wide">Amor Cristiano</span>
       </div>
     </a>
     <button

@@ -1,3 +1,12 @@
+/* ── Custom Fonts ──────────────────────────────── */
+@font-face {
+  font-family: 'MuseoSans';
+  src: url('/fonts/Fontspring-DEMO-MuseoSans_700.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── Design Tokens ─────────────────────────────── */
 :root {
   --color-white:  #ffffff;

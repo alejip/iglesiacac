@@ -13,7 +13,7 @@ const MAPS_LINK = 'https://maps.app.goo.gl/YVrcvGYhcTeFbdbw5';
   <!-- ── Page header ───────────────────────────────────── -->
   <section class="bg-brand-brown pt-32 pb-20 px-4">
     <div class="max-w-3xl mx-auto text-center">
-      <span class="inline-block bg-brand-orange/20 text-brand-orange text-xs font-bold uppercase tracking-widest rounded-full px-4 py-2 mb-6">
+      <span class="inline-block bg-white/20 text-white text-xs font-bold uppercase tracking-widest rounded-full px-4 py-2 mb-6">
         Contacto
       </span>
       <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6">
@@ -145,22 +145,17 @@ const MAPS_LINK = 'https://maps.app.goo.gl/YVrcvGYhcTeFbdbw5';
       <!-- Map embed placeholder -->
       <div>
         <h2 class="text-3xl font-extrabold text-brand-brown mb-8">Cómo llegar</h2>
-        <!-- Google Maps embed iframe — replace src with real embed URL if desired -->
-        <div class="rounded-2xl overflow-hidden bg-brand-cream h-72 flex flex-col items-center justify-center gap-4 text-brand-brown/40">
-          <svg class="w-12 h-12 opacity-40" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-          </svg>
-          <p class="text-sm font-medium text-center px-4 opacity-50">
-            C/ Sor Ángela de la Cruz 6, 14006 Córdoba
-          </p>
-          <a
-            href={MAPS_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-6 py-2.5 bg-brand-orange text-white rounded-full font-semibold text-sm hover:bg-orange-600 transition-colors duration-200 opacity-100"
-          >
-            Ver en Google Maps
-          </a>
+        <div class="rounded-2xl overflow-hidden h-72 shadow-sm">
+          <iframe
+            src="https://maps.google.com/maps?q=Sor+%C3%81ngela+de+la+Cruz+6%2C+14006+C%C3%B3rdoba&output=embed&hl=es"
+            width="100%"
+            height="100%"
+            style="border:0;"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación de Comunidad de Amor Cristiano"
+          ></iframe>
         </div>
       </div>
 
