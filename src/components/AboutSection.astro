@@ -42,7 +42,7 @@
       <!-- Image column -->
       <!-- Replace /images/about-1.webp with a real photo of the community -->
       <div class="relative">
-        <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-brand-beige">
+        <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-brand-beige">
           <img
             src="/images/about-1.jpg"
             alt="Congregación de la iglesia cristiana Comunidad de Amor Cristiano en Córdoba"
@@ -72,7 +72,7 @@
 
 <script>
   // Hide fallback overlay once the image loads successfully
-  const img = document.querySelector<HTMLImageElement>('img[alt="Comunidad de Amor Cristiano"]');
+  const img = document.querySelector<HTMLImageElement>('img[alt="Congregación de la iglesia cristiana Comunidad de Amor Cristiano en Córdoba"]');
   const fallback = document.getElementById('about-img-fallback');
   if (img && fallback) {
     if (img.complete && img.naturalWidth > 0) {
