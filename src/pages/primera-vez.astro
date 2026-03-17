@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import ninosImg from '../assets/images/ninos.jpg';
 import CTASection from '../components/CTASection.astro';
 
 const WA_LINK = 'https://wa.me/34658769351?text=Hola%20Comunidad%20de%20Amor%20Cristiano%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20info%20para%20visitaros.';
@@ -225,11 +227,13 @@ const faq = [
           </a>
         </div>
         <div class="rounded-2xl bg-brand-beige aspect-square overflow-hidden">
-          <img
-            src="/images/ninos.jpg"
+          <Image
+            src={ninosImg}
             alt="Ministerio de niños de la iglesia cristiana en Córdoba"
             class="w-full h-full object-cover"
             loading="lazy"
+            widths={[480, 900]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
           />
         </div>
       </div>

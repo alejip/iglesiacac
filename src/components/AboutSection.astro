@@ -1,5 +1,6 @@
 ---
-// AboutSection.astro
+import { Image } from 'astro:assets';
+import about1 from '../assets/images/about-1.jpg';
 ---
 
 <section class="bg-brand-cream py-24 px-4">
@@ -43,8 +44,8 @@
       <!-- Replace /images/about-1.webp with a real photo of the community -->
       <div class="relative">
         <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-brand-beige">
-          <img
-            src="/images/about-1.jpg"
+          <Image
+            src={about1}
             alt="Congregación de la iglesia cristiana Comunidad de Amor Cristiano en Córdoba"
             class="w-full h-full object-cover"
             loading="lazy"

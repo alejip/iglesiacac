@@ -1,6 +1,10 @@
 ---
-// MinistriesGrid.astro
-// Cards redesigned: image on top + text block below — no overlapping elements.
+import { Image } from 'astro:assets';
+import imgNinos from '../assets/images/ministerio-ninos.jpg';
+import imgJovenes from '../assets/images/ministerio-jovenes.jpg';
+import imgGrupos from '../assets/images/ministerio-grupos.jpg';
+import imgMisiones from '../assets/images/ministerio-misiones.jpg';
+import imgObraSocial from '../assets/images/ministerio-obra-social.jpg';
 
 const ministries = [
   {
@@ -9,7 +13,7 @@ const ministries = [
     description: 'Un espacio seguro y divertido donde los más pequeños conocen a Jesús a través de historias, juegos y canciones.',
     link: '/primera-vez#ninos',
     linkLabel: 'Saber más',
-    image: '/images/ministerio-ninos.jpg',
+    image: imgNinos,
     iconBg: 'bg-orange-50',
     iconColor: 'text-brand-orange',
     icon: `<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>`,
@@ -20,7 +24,7 @@ const ministries = [
     description: 'Jóvenes que buscan vivir su fe con pasión y autenticidad. Nos reunimos los viernes para adorar, aprender y conectar.',
     link: '/jovenes',
     linkLabel: 'Ver página de jóvenes',
-    image: '/images/ministerio-jovenes.jpg',
+    image: imgJovenes,
     iconBg: 'bg-amber-50',
     iconColor: 'text-brand-brown',
     icon: `<path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>`,
@@ -31,7 +35,7 @@ const ministries = [
     description: 'Células de vida donde compartimos la fe en lo cotidiano. Crecemos juntos, oramos juntos y nos cuidamos mutuamente.',
     link: '/contacto',
     linkLabel: 'Únete a un grupo',
-    image: '/images/ministerio-grupos.jpg',
+    image: imgGrupos,
     iconBg: 'bg-red-50',
     iconColor: 'text-brand-red',
     icon: `<path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>`,
@@ -42,7 +46,7 @@ const ministries = [
     description: 'Llevamos el amor de Cristo más allá de nuestras paredes. Proyectos locales e internacionales que transforman vidas.',
     link: '/contacto',
     linkLabel: 'Participar',
-    image: '/images/ministerio-misiones.jpg',
+    image: imgMisiones,
     iconBg: 'bg-brand-cream',
     iconColor: 'text-brand-orange',
     icon: `<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clip-rule="evenodd"/>`,
@@ -53,7 +57,7 @@ const ministries = [
     description: 'Extendemos el amor de Jesús sirviendo a los más vulnerables de nuestra ciudad. Ayuda alimentaria, acompañamiento y esperanza.',
     link: '/contacto',
     linkLabel: 'Colaborar',
-    image: '/images/ministerio-obra-social.jpg',
+    image: imgObraSocial,
     iconBg: 'bg-green-50',
     iconColor: 'text-green-600',
     icon: `<path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>`,
@@ -84,11 +88,13 @@ const ministries = [
 
           <!-- Image area (top) — replace src with real photos -->
           <div class="relative h-44 overflow-hidden bg-brand-beige shrink-0">
-            <img
+            <Image
               src={m.image}
               alt={m.name}
               class="w-full h-full object-cover opacity-60 group-hover:opacity-75 group-hover:scale-105 transition-all duration-500"
               loading="lazy"
+              widths={[400, 800]}
+              sizes="(max-width: 640px) 100vw, 50vw"
             />
             <!-- Gradient overlay so the tag badge is readable -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
