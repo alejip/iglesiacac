@@ -1,4 +1,8 @@
 ---
+import { Image } from 'astro:assets';
+import logoPositivo from '../assets/images/LogoCAC_positivo.png';
+import logoBlanco from '../assets/images/logoCAC_blanco.png';
+
 interface Props {
   /**
    * Set to true when the header sits as a transparent overlay over a dark hero.
@@ -10,14 +14,8 @@ interface Props {
 
 const { isHeroOverlay = false } = Astro.props;
 
-// Logo paths (files must be in public/Logos/)
-const LOGO_POSITIVE = '/Logos/LogoCAC_positivo.png';
-const LOGO_WHITE    = '/Logos/logoCAC_blanco.png';
-
 // Navbar logo: white version only when overlaying a dark hero
-const navbarLogo = isHeroOverlay ? LOGO_WHITE : LOGO_POSITIVE;
-// Drawer logo: always positive (drawer background is always white)
-const drawerLogo = LOGO_POSITIVE;
+const navbarLogoSrc = isHeroOverlay ? logoBlanco : logoPositivo;
 
 // Name text colour: white over dark hero, brown on white pill
 const nameColor = isHeroOverlay ? 'text-white' : 'text-brand-brown';
@@ -40,11 +38,13 @@ const navLinks = [
     <!-- Logo + Name -->
     <a href="/" class="flex items-center gap-3 flex-none group" aria-label="Inicio">
       <!-- Logo image -->
-      <img
-        src={navbarLogo}
+      <Image
+        src={navbarLogoSrc}
         alt="Logo Comunidad de Amor Cristiano"
+        height={72}
         class="h-9 w-auto object-contain shrink-0 transition-opacity duration-200 group-hover:opacity-80"
         fetchpriority="high"
+        loading="eager"
       />
       <!-- Church name: two lines on xl, hidden on smaller -->
       <div
@@ -117,10 +117,12 @@ const navLinks = [
   <!-- Drawer header — always white background → positive logo -->
   <div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">
     <a href="/" class="flex items-center gap-3">
-      <img
-        src={drawerLogo}
+      <Image
+        src={logoPositivo}
         alt="Logo Comunidad de Amor Cristiano"
+        height={64}
         class="h-8 w-auto object-contain shrink-0"
+        loading="lazy"
       />
       <div class="leading-tight text-brand-brown" style="font-family: 'MuseoSans', 'Plus Jakarta Sans', sans-serif;">
         <span class="block font-bold text-[13px] tracking-wide">Comunidad de</span>
