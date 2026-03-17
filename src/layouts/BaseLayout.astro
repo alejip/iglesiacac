@@ -8,26 +8,28 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
 }
 
 const {
   title = 'Iglesia Cristiana en Córdoba | Comunidad de Amor Cristiano',
   description = 'Somos una iglesia cristiana en Córdoba que ama a Jesús y a las personas. Reuniones domingos 11:30 y 19:00 en C/ Sor Ángela de la Cruz 6.',
-  image = '/images/og-default.svg',
+  image = '/images/hero.jpg',
+  imageAlt = 'Comunidad de Amor Cristiano — Iglesia cristiana en Córdoba',
 } = Astro.props;
 
 const SITE_URL = 'https://iglesiacac.es';
 const canonicalURL = new URL(Astro.url.pathname, SITE_URL).href;
 const ogImage = image.startsWith('http') ? image : `${SITE_URL}${image}`;
 
-const jsonLd = {
+const churchJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Church',
   name: 'Comunidad de Amor Cristiano',
   alternateName: 'Iglesia CAC Córdoba',
   url: SITE_URL,
   logo: `${SITE_URL}/images/logo-llama.png`,
-  image: `${SITE_URL}/images/og-default.svg`,
+  image: `${SITE_URL}/images/hero.jpg`,
   description: 'Iglesia cristiana en Córdoba que ama a Jesús y a las personas. Fe real y transformadora, grupos célula y misiones.',
   address: {
     '@type': 'PostalAddress',
@@ -79,6 +81,23 @@ const jsonLd = {
     'https://www.facebook.com/IglesiaCAC',
   ],
 };
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Comunidad de Amor Cristiano',
+  url: SITE_URL,
+  description: 'Iglesia cristiana en Córdoba. Reuniones domingos a las 11:30 y 19:00.',
+  inLanguage: 'es-ES',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${SITE_URL}/buscar?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
+};
 ---
 <!doctype html>
 <html lang="es">
@@ -86,11 +105,14 @@ const jsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="author" content="Comunidad de Amor Cristiano" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#401c14" />
 
-    <!-- Canonical -->
+    <!-- Canonical + hreflang -->
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="es" href={canonicalURL} />
+    <link rel="alternate" hreflang="x-default" href={canonicalURL} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -100,6 +122,7 @@ const jsonLd = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content="Comunidad de Amor Cristiano" />
 
@@ -108,6 +131,7 @@ const jsonLd = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={imageAlt} />
 
     <title>{title}</title>
 
@@ -125,7 +149,11 @@ const jsonLd = {
     />
 
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(churchJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
+
+    <!-- Slot para schemas adicionales por página -->
+    <slot name="head" />
   </head>
   <body>
     <Header />

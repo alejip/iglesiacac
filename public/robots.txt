@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://iglesiacac.es/sitemap.xml
+Sitemap: https://iglesiacac.es/sitemap-index.xml
