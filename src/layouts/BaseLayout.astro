@@ -13,7 +13,7 @@ interface Props {
 
 const {
   title = 'Iglesia Cristiana en Córdoba | Comunidad de Amor Cristiano',
-  description = 'Somos una iglesia cristiana en Córdoba que ama a Jesús y a las personas. Reuniones domingos 11:30 y 19:00 en C/ Sor Ángela de la Cruz 6.',
+  description = 'Iglesia cristiana y evangélica en Córdoba. Comunidad de Amor Cristiano — reuniones domingos 11:30 y 19:00 en C/ Sor Ángela de la Cruz 6.',
   image = '/images/hero.jpg',
   imageAlt = 'Comunidad de Amor Cristiano — Iglesia cristiana en Córdoba',
 } = Astro.props;
@@ -30,7 +30,9 @@ const churchJsonLd = {
   url: SITE_URL,
   logo: `${SITE_URL}/images/logo-llama.png`,
   image: `${SITE_URL}/images/hero.jpg`,
-  description: 'Iglesia cristiana en Córdoba que ama a Jesús y a las personas. Fe real y transformadora, grupos célula y misiones.',
+  description: 'Iglesia cristiana y evangélica en Córdoba. Fe real y transformadora, grupos célula y misiones.',
+  keywords: ['iglesia cristiana Córdoba', 'iglesia evangélica Córdoba', 'iglesia pentecostal Córdoba', 'Comunidad de Amor Cristiano', 'iglesia CAC Córdoba'],
+  hasMap: 'https://maps.app.goo.gl/YVrcvGYhcTeFbdbw5',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'C/ Sor Ángela de la Cruz 6',
@@ -40,8 +42,8 @@ const churchJsonLd = {
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 37.8882,
-    longitude: -4.7794,
+    latitude: 37.9013846,
+    longitude: -4.7735889,
   },
   telephone: '+34658769351',
   email: 'info@iglesiacac.es',
