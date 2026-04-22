@@ -1,0 +1,14 @@
+name: Rebuild semanal (predicaciones)
+
+on:
+  schedule:
+    # Cada lunes a las 10:00 hora de España (08:00 UTC)
+    - cron: '0 8 * * 1'
+  workflow_dispatch: # permite lanzarlo manualmente desde GitHub
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel Deploy Hook
+        run: curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
