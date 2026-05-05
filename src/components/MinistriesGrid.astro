@@ -10,7 +10,7 @@ const ministries = [
   {
     name: 'Niños',
     tag: 'Ministerio',
-    description: 'Un espacio seguro y divertido donde los más pequeños conocen a Jesús a través de historias, juegos y canciones.',
+    description: 'Un espacio seguro y divertido donde los más pequeños conocen a Jesús a través de historias, juegos y canciones. Personal preparado y formado para crear un ambiente de seguridad.',
     link: '/primera-vez#ninos',
     linkLabel: 'Saber más',
     image: imgNinos,
@@ -30,8 +30,8 @@ const ministries = [
     icon: `<path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>`,
   },
   {
-    name: 'Grupos en Casas',
-    tag: 'Células',
+    name: 'Células',
+    tag: 'Vida en comunidad',
     description: 'Células de vida donde compartimos la fe en lo cotidiano. Crecemos juntos, oramos juntos y nos cuidamos mutuamente.',
     link: '/contacto',
     linkLabel: 'Únete a un grupo',
@@ -43,7 +43,8 @@ const ministries = [
   {
     name: 'Misiones',
     tag: 'Local e internacional',
-    description: 'Llevamos el amor de Cristo más allá de nuestras paredes. Proyectos locales e internacionales que transforman vidas.',
+    description: 'Llevamos el amor de Cristo más allá de nuestras paredes. Hemos enviado misioneros a Asia Central, la Familia Moslero a Grecia, y Raquel & Ezra en Puerto Rico. Como parte de Asambleas de Dios, trabajamos junto al DEMADE.',
+    descriptionHtml: 'Llevamos el amor de Cristo más allá de nuestras paredes. Hemos enviado misioneros a Asia Central, la Familia Moslero a Grecia, y Raquel &amp; Ezra en Puerto Rico. Como parte de Asambleas de Dios, trabajamos junto al <a href="https://asambleasdedios.info/demade/" target="_blank" rel="noopener noreferrer" class="text-brand-orange hover:underline font-semibold">DEMADE</a>.',
     link: '/contacto',
     linkLabel: 'Participar',
     image: imgMisiones,
@@ -54,7 +55,8 @@ const ministries = [
   {
     name: 'Obra Social',
     tag: 'Comunidad',
-    description: 'Extendemos el amor de Jesús sirviendo a los más vulnerables de nuestra ciudad. Ayuda alimentaria, acompañamiento y esperanza.',
+    description: 'Extendemos el amor de Jesús sirviendo a los más vulnerables de nuestra ciudad. Ayuda alimentaria, acompañamiento y esperanza. Fundamos y auspiciamos la Asociación APERFOSA.',
+    descriptionHtml: 'Extendemos el amor de Jesús sirviendo a los más vulnerables de nuestra ciudad. Ayuda alimentaria, acompañamiento y esperanza. Fundamos y auspiciamos la Asociación <a href="https://aperfosa.org" target="_blank" rel="noopener noreferrer" class="text-brand-orange hover:underline font-semibold">APERFOSA</a>.',
     link: '/contacto',
     linkLabel: 'Colaborar',
     image: imgObraSocial,
@@ -116,7 +118,10 @@ const ministries = [
             </div>
 
             <!-- Description -->
-            <p class="text-gray-500 text-sm leading-relaxed flex-1">{m.description}</p>
+            {m.descriptionHtml
+              ? <p class="text-gray-500 text-sm leading-relaxed flex-1" set:html={m.descriptionHtml} />
+              : <p class="text-gray-500 text-sm leading-relaxed flex-1">{m.description}</p>
+            }
 
             <!-- Link -->
             <a
