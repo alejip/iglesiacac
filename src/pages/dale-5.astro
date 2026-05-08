@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import dale5Logo from '../assets/images/dale5_logo.svg';
 
 const habits = [
   {
@@ -64,9 +66,12 @@ const prayerPoints = [
       <span class="inline-block bg-white/20 text-white text-xs font-bold uppercase tracking-widest rounded-full px-4 py-2 mb-6">
         Oración y Evangelismo
       </span>
-      <h1 class="text-6xl md:text-7xl font-extrabold text-white leading-tight mb-4">
-        Dale <span class="text-brand-orange">5</span>
-      </h1>
+      <Image
+        src={dale5Logo}
+        alt="Logo Dale 5"
+        class="mx-auto mb-6 h-32 w-auto"
+        loading="eager"
+      />
       <p class="text-xl text-white/75 leading-relaxed max-w-xl mx-auto mb-10">
         Una campaña global para orar por cada persona en el mundo por nombre y presentarles a Jesús.
       </p>
