@@ -16,6 +16,10 @@ const cards = [
     title: 'Transparencia voluntaria y buenas prácticas',
     description: 'Compromisos éticos, código de conducta, política de protección de datos y otras iniciativas de buen gobierno.',
     icon: `<path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>`,
+    doc: {
+      label: 'Prevención de delitos y buenas prácticas 2025',
+      href: '/documentos/prevencion-delitos-buenas-practicas-2025.pdf',
+    },
   },
 ];
 ---
@@ -56,12 +60,26 @@ const cards = [
               <h2 class="font-extrabold text-brand-brown text-base leading-snug mb-3">{card.title}</h2>
               <p class="text-gray-500 text-sm leading-relaxed">{card.description}</p>
             </div>
-            <span class="inline-flex items-center gap-1.5 text-brand-brown/30 text-xs font-semibold mt-auto">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-              Próximamente disponible
-            </span>
+            {card.doc ? (
+              <a
+                href={card.doc.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 text-brand-orange text-xs font-semibold mt-auto hover:underline"
+              >
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                </svg>
+                {card.doc.label}
+              </a>
+            ) : (
+              <span class="inline-flex items-center gap-1.5 text-brand-brown/30 text-xs font-semibold mt-auto">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Próximamente disponible
+              </span>
+            )}
           </div>
         ))}
       </div>
