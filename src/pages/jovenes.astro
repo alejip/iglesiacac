@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTASection from '../components/CTASection.astro';
+import { Image } from 'astro:assets';
+import jovenesImg from '../assets/images/ministerio-jovenes.jpg';
 
 const WA_JOVENES = 'https://wa.me/34658769351?text=Hola%2C%20me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre%20el%20grupo%20de%20j%C3%B3venes%20de%20Comunidad%20de%20Amor%20Cristiano.';
 const MAPS_LINK = 'https://maps.app.goo.gl/YVrcvGYhcTeFbdbw5';
@@ -48,8 +50,7 @@ const values = [
   <section class="relative bg-brand-brown overflow-hidden pt-32 pb-24 px-4">
     <!-- Decorative background shape -->
     <div class="absolute top-0 right-0 w-1/2 h-full opacity-10">
-      <!-- Replace with /images/jovenes.webp -->
-      <img src="/images/jovenes.webp" alt="" role="presentation" class="w-full h-full object-cover" />
+      <Image src={jovenesImg} alt="" role="presentation" class="w-full h-full object-cover" loading="eager" />
     </div>
     <div class="absolute inset-0 bg-gradient-to-r from-brand-brown via-brand-brown/90 to-transparent"></div>
 

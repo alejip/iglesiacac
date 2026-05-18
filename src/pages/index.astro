@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { Image } from 'astro:assets';
-import heroImg from '../assets/images/hero.jpg';
 import InfoCards from '../components/InfoCards.astro';
 import AboutSection from '../components/AboutSection.astro';
 import Meetings from '../components/Meetings.astro';
@@ -100,17 +98,16 @@ const expectItems = [
       <div class="relative order-1 lg:order-2 flex justify-center lg:justify-end">
         <!-- Decorative background blob -->
         <div class="absolute inset-0 bg-brand-cream rounded-3xl -rotate-2 scale-95 opacity-70"></div>
-        <!-- Photo -->
-        <div class="relative w-full max-w-sm lg:max-w-none aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl">
-          <Image
-            src={heroImg}
-            alt="Congregación de Comunidad de Amor Cristiano adorando"
+        <!-- Video -->
+        <div class="relative w-full max-w-xs lg:max-w-sm aspect-[9/16] rounded-3xl overflow-hidden shadow-2xl">
+          <video
+            src="/images/hero.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
             class="w-full h-full object-cover object-center"
-            fetchpriority="high"
-            loading="eager"
-            widths={[400, 640, 900]}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 45vw"
-          />
+          ></video>
           <!-- Subtle warm vignette at bottom -->
           <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/20 to-transparent"></div>
         </div>
