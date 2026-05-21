@@ -9,6 +9,7 @@ interface Props {
   description?: string;
   image?: string;
   imageAlt?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   description = 'Iglesia cristiana y evangélica en Córdoba. Comunidad de Amor Cristiano — reuniones domingos 11:30 y 19:00 en C/ Sor Ángela de la Cruz 6.',
   image = '/images/hero.jpg',
   imageAlt = 'Comunidad de Amor Cristiano — Iglesia cristiana en Córdoba',
+  noindex = false,
 } = Astro.props;
 
 const SITE_URL = 'https://iglesiacac.es';
@@ -101,7 +103,7 @@ const websiteJsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="author" content="Comunidad de Amor Cristiano" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
     <meta name="theme-color" content="#401c14" />
 
     <!-- Canonical + hreflang -->

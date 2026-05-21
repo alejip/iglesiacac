@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const TALLY_PREDICACION = 'https://tally.so/r/GxQxae';
+const TALLY_ANUNCIOS    = 'https://tally.so/r/yPdPAX';
+const TALLY_EVENTO      = 'https://tally.so/r/ODoDNg';
+
+const cards = [
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3Z" />`,
+    label: 'Enviar predicación',
+    description: 'Envía el título, pasaje bíblico y material de apoyo del mensaje del domingo o evento.',
+    cta: 'Ir al formulario',
+    href: TALLY_PREDICACION,
+  },
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 1 1 0-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 0 1-1.44-4.282m3.102.069a18.03 18.03 0 0 1-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 0 1 8.835 2.535M10.34 6.66a23.847 23.847 0 0 0 8.835-2.535m0 0A23.74 23.74 0 0 0 18.795 3m.38 1.125a23.91 23.91 0 0 1 1.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 0 0 1.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 0 1 0 3.46" />`,
+    label: 'Enviar anuncios',
+    description: 'Comparte información de actividades, eventos o comunicados para pantallas y redes.',
+    cta: 'Ir al formulario',
+    href: TALLY_ANUNCIOS,
+  },
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />`,
+    label: 'Solicitar evento',
+    description: 'Pide cobertura multimedia para un culto especial, bautismo, boda u otro evento.',
+    cta: 'Ir al formulario',
+    href: TALLY_EVENTO,
+  },
+];
+
+const requiredFields = [
+  'Nombre completo del solicitante',
+  'Fecha y hora del evento o publicación',
+  'Título o descripción completa del contenido',
+  'Archivos adjuntos o recursos necesarios (fotos, logos, textos)',
+  'Canal o formato deseado (pantalla, redes sociales, impreso…)',
+];
+---
+
+<BaseLayout
+  title="Centro MEDIA — Comunidad de Amor Cristiano"
+  description="Centro operativo del equipo MEDIA de la Comunidad de Amor Cristiano."
+  noindex={true}
+>
+
+  <!-- ── Hero ─────────────────────────────────────────── -->
+  <section class="bg-brand-brown pt-32 pb-20 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <span class="inline-block bg-white/20 text-white text-xs font-bold uppercase tracking-widest rounded-full px-4 py-2 mb-6">
+        Uso interno · Equipo MEDIA
+      </span>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight mb-5">
+        Centro MEDIA
+      </h1>
+      <p class="text-lg text-white/70 leading-relaxed max-w-xl mx-auto">
+        Bienvenido al centro operativo del equipo MEDIA. Desde aquí podrás enviar predicaciones,
+        anuncios y solicitudes relacionadas con comunicación y multimedia.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Tarjetas ──────────────────────────────────────── -->
+  <section class="bg-white py-24 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14">
+        <span class="inline-block text-brand-orange font-semibold text-sm uppercase tracking-widest mb-3">
+          Acciones disponibles
+        </span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-brand-brown leading-tight">
+          ¿Qué necesitas enviar?
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {cards.map(card => (
+          <div class="rounded-2xl bg-brand-cream p-8 flex flex-col gap-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+            <div class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-sm">
+              <svg class="w-6 h-6 text-brand-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" set:html={card.icon} />
+            </div>
+            <div>
+              <h3 class="font-extrabold text-brand-brown text-xl mb-2">{card.label}</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">{card.description}</p>
+            </div>
+            <a
+              href={card.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-orange text-white rounded-xl font-bold text-sm hover:bg-orange-600 transition-all duration-200 hover:-translate-y-0.5 shadow-sm"
+            >
+              {card.cta}
+              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Aviso importante ──────────────────────────────── -->
+  <section class="bg-brand-brown py-20 px-4">
+    <div class="max-w-3xl mx-auto">
+      <div class="flex items-start gap-4 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <svg class="w-5 h-5 text-brand-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-xl font-extrabold text-white leading-snug mb-1">
+            Para evitar pérdidas de información
+          </h2>
+          <p class="text-white/60 text-sm leading-relaxed">
+            Todas las solicitudes deben incluir los siguientes datos. Sin ellos no podremos procesarlas correctamente.
+          </p>
+        </div>
+      </div>
+      <ul class="space-y-3">
+        {requiredFields.map(field => (
+          <li class="flex items-start gap-4 bg-white/5 rounded-xl px-6 py-4">
+            <span class="w-2 h-2 rounded-full bg-brand-orange flex-shrink-0 mt-2"></span>
+            <span class="text-white/80 text-sm leading-relaxed">{field}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+</BaseLayout>
