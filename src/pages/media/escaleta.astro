@@ -1,0 +1,925 @@
+---
+import '../../styles/theme.css';
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Escaleta Domingo — MEDIA · CAC</title>
+  <link rel="icon" type="image/png" href="/images/logo-llama.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" />
+  <style>
+    /* ── Inputs ──────────────────────────────────────────── */
+    .fi {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      color: #111827;
+      background: white;
+      transition: border-color .15s, box-shadow .15s;
+      outline: none;
+    }
+    .fi:focus { border-color: #e8501d; box-shadow: 0 0 0 3px rgba(232,80,29,.1); }
+    textarea.fi { resize: vertical; min-height: 72px; }
+    .fl {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    /* ── Sección card ────────────────────────────────────── */
+    .sc { background: #f4f0e4; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+    .st {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: #e8501d; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    /* ── Bloques ─────────────────────────────────────────── */
+    .bh, .br {
+      display: grid;
+      grid-template-columns: 76px 1fr 1fr 76px 1fr 76px;
+      gap: 6px;
+      align-items: start;
+    }
+    .bh { padding-bottom: 8px; border-bottom: 2px solid #ddd8d0; margin-bottom: 4px; }
+    .bh span { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #9ca3af; }
+    .br { padding: 8px 0; border-bottom: 1px solid #f3f4f6; }
+    .br:last-child { border-bottom: none; }
+
+    /* ── Botones de acción pequeños ──────────────────────── */
+    .ba {
+      padding: 6px 7px; border-radius: 6px; border: 1px solid #e5e7eb;
+      background: white; cursor: pointer; color: #6b7280;
+      transition: all .15s; display: inline-flex; align-items: center; justify-content: center;
+    }
+    .ba:hover { background: #f4f0e4; color: #401c14; border-color: #ddd8d0; }
+    .ba.del:hover { background: #fee2e2; color: #dc2626; border-color: #fca5a5; }
+    .ba:disabled { opacity: .3; cursor: default; pointer-events: none; }
+
+    /* ── Checklist ───────────────────────────────────────── */
+    .ci {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; border-radius: 10px; background: white; cursor: pointer;
+    }
+    .ci:hover { background: #f4f0e4; }
+    .ci input[type="checkbox"] { width: 17px; height: 17px; accent-color: #e8501d; cursor: pointer; flex-shrink: 0; }
+    .ci span { font-size: 13px; color: #374151; font-weight: 500; }
+
+    /* ── PREVIEW / PRINT ─────────────────────────────────── */
+    #preview-content {
+      max-width: 794px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .ph { background: #401c14; color: white; padding: 28px 32px; }
+    .ph-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+    .ph-badge {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; background: rgba(255,255,255,.15);
+      padding: 4px 12px; border-radius: 100px;
+    }
+    .ph-date { font-size: 13px; color: rgba(255,255,255,.55); }
+    .ph-title { font-size: 22px; font-weight: 800; margin-bottom: 3px; }
+    .ph-sub { font-size: 13px; color: rgba(255,255,255,.55); margin-bottom: 18px; }
+    .ph-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .pf { background: rgba(255,255,255,.08); border-radius: 8px; padding: 10px 14px; }
+    .pf-l { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.4); margin-bottom: 3px; }
+    .pf-v { font-size: 14px; font-weight: 600; }
+    .pb { padding: 28px 32px; }
+    .ps {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .09em; color: #e8501d;
+      margin: 0 0 12px; padding-bottom: 7px;
+      border-bottom: 2px solid #f4f0e4;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ps + .ps { margin-top: 24px; }
+
+    /* Predicación box */
+    .pred-box {
+      background: #f4f0e4; border-radius: 10px;
+      padding: 14px 16px; margin-bottom: 24px;
+      display: flex; gap: 14px; align-items: center;
+    }
+    .pred-bar { width: 3px; border-radius: 3px; background: #e8501d; align-self: stretch; flex-shrink: 0; }
+    .pred-t { font-size: 16px; font-weight: 800; color: #401c14; margin-bottom: 2px; }
+    .pred-s { font-size: 13px; color: #6b7280; }
+
+    /* Escaleta table */
+    .et { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 13px; }
+    .et th {
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: #9ca3af;
+      text-align: left; padding: 8px 12px;
+      background: #f9fafb; border-bottom: 2px solid #f4f0e4;
+    }
+    .et td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; color: #111827; vertical-align: top; }
+    .et tr:last-child td { border-bottom: none; }
+    .et .tc-hora { font-weight: 700; color: #e8501d; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .et .tc-dur { color: #9ca3af; font-size: 12px; white-space: nowrap; }
+    .et .tc-not { color: #6b7280; font-size: 12px; }
+
+    /* Anuncio preview */
+    .ap { padding: 12px 16px; border-radius: 10px; background: #f9fafb; margin-bottom: 8px; border-left: 3px solid #e8501d; }
+    .ap-t { font-weight: 700; font-size: 14px; color: #111827; margin-bottom: 3px; }
+    .ap-d { font-size: 13px; color: #374151; margin-bottom: 6px; white-space: pre-wrap; }
+    .ap-m { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ap-tag { background: #f3f4f6; padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 600; color: #6b7280; }
+    .ap-tag.media { background: #fff7ed; color: #c2410c; }
+
+    /* Equipo grid */
+    .eg { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-bottom: 24px; }
+    .ei { padding: 8px 10px; border-radius: 8px; background: #f9fafb; }
+    .ei-r { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #9ca3af; margin-bottom: 2px; }
+    .ei-n { font-size: 13px; font-weight: 600; color: #111827; }
+    .ei.empty .ei-n { color: #e5e7eb; }
+
+    /* Checklist preview */
+    .cg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 16px; }
+    .cp { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; background: #f9fafb; font-size: 12px; color: #6b7280; }
+    .cp.ok { background: #f0fdf4; color: #166534; }
+    .cp svg { flex-shrink: 0; }
+
+    /* Observaciones */
+    .obs { background: #fffbeb; border-left: 3px solid #f59e0b; padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 13px; color: #374151; margin-bottom: 24px; white-space: pre-wrap; }
+
+    /* Print footer */
+    .pfoot { margin-top: 28px; padding-top: 14px; border-top: 1px solid #f3f4f6; text-align: center; font-size: 10px; color: #d1d5db; }
+
+    /* ── Print ───────────────────────────────────────────── */
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      body { background: #f4f0e4 !important; }
+      #pwd-screen, #edit-mode, #preview-actions, #save-ind { display: none !important; }
+      #preview-mode { display: block !important; padding: 0 !important; background: #f4f0e4 !important; }
+      #preview-content { max-width: 100% !important; border-radius: 0 !important; box-shadow: none !important; margin: 0 !important; padding: 0 !important; }
+      .screen-sep { display: none !important; }
+      @page { margin: 7mm; size: A4 landscape; }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+
+  <!-- ── PANTALLA DE CONTRASEÑA ─────────────────────────── -->
+  <div id="pwd-screen" class="fixed inset-0 bg-brand-brown flex items-center justify-center z-50 px-4">
+    <div class="w-full max-w-sm">
+      <div class="text-center mb-8">
+        <img src="/images/logo-llama.png" alt="CAC" class="h-10 w-auto mx-auto mb-5 opacity-80" />
+        <span class="inline-block bg-white/15 text-white/80 text-xs font-bold uppercase tracking-widest rounded-full px-4 py-1.5 mb-4">
+          Uso interno · Equipo MEDIA
+        </span>
+        <h1 class="text-3xl font-extrabold text-white mb-2">Escaleta</h1>
+        <p class="text-white/45 text-sm">Introduce la contraseña para acceder</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-2xl p-6">
+        <label class="block text-white/50 text-xs font-bold uppercase tracking-widest mb-2">Contraseña</label>
+        <input
+          id="pwd-in"
+          type="password"
+          placeholder="••••••••"
+          class="w-full px-4 py-3 rounded-xl bg-white/15 border border-white/15 text-white placeholder-white/25 text-sm font-medium outline-none focus:border-brand-orange transition-all"
+          autocomplete="current-password"
+        />
+        <p id="pwd-err" class="text-red-300 text-xs mt-2 hidden">Contraseña incorrecta</p>
+        <button id="pwd-btn" class="mt-4 w-full py-3 bg-brand-orange text-white rounded-xl font-bold text-sm hover:bg-orange-600 transition-colors">
+          Entrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── APP ───────────────────────────────────────────── -->
+  <div id="app" class="hidden">
+
+    <!-- Indicador de guardado (toast fijo) -->
+    <div id="save-ind" class="fixed bottom-5 right-5 z-50 hidden bg-brand-brown text-white text-xs font-semibold px-4 py-2 rounded-full shadow-lg pointer-events-none"></div>
+
+    <!-- ── MODO EDICIÓN ───────────────────────────────── -->
+    <div id="edit-mode" class="max-w-5xl mx-auto px-4 py-8">
+
+      <!-- Escaletas guardadas -->
+      <div class="mb-6">
+        <div class="flex items-center justify-between mb-2.5">
+          <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Escaletas guardadas</span>
+        </div>
+        <div id="saved-list" class="flex flex-wrap gap-2">
+          <p id="saved-empty" class="text-xs text-gray-400 italic py-1">
+            Aún no hay escaletas guardadas. Usa «Guardar» para conservar una.
+          </p>
+        </div>
+      </div>
+
+      <!-- Información general -->
+      <div class="sc">
+        <div class="st">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+          Información general
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div><label class="fl">Fecha</label><input id="g-fecha" type="date" class="fi" /></div>
+          <div><label class="fl">Hora</label><input id="g-hora" type="time" class="fi" value="11:30" /></div>
+          <div><label class="fl">Duración estimada</label><input id="g-dur" type="text" class="fi" value="105 min" /></div>
+          <div><label class="fl">Dirige</label><input id="g-dirige" type="text" class="fi" placeholder="Nombre" /></div>
+          <div><label class="fl">Predica</label><input id="g-predica" type="text" class="fi" placeholder="Nombre" /></div>
+          <div><label class="fl">Coordina</label><input id="g-coordina" type="text" class="fi" placeholder="Nombre" /></div>
+          <div class="col-span-2"><label class="fl">Título de la predicación</label><input id="g-titulo" type="text" class="fi" placeholder="Título del mensaje" /></div>
+          <div><label class="fl">Texto bíblico</label><input id="g-texto" type="text" class="fi" placeholder="ej. Juan 3:16" /></div>
+          <div class="col-span-2 md:col-span-3"><label class="fl">Observaciones generales</label><textarea id="g-obs" class="fi" placeholder="Notas generales del culto..."></textarea></div>
+        </div>
+      </div>
+
+      <!-- Equipo -->
+      <div class="sc">
+        <div class="st">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg>
+          Equipo
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="equipo-grid"></div>
+      </div>
+
+      <!-- Bloques -->
+      <div class="sc">
+        <div class="st">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z"/></svg>
+          Bloques de la escaleta
+        </div>
+        <div class="overflow-x-auto">
+          <div style="min-width:680px;">
+            <div class="bh">
+              <span>Hora</span><span>Responsable</span><span>Sección</span>
+              <span>Duración</span><span>Notas</span><span></span>
+            </div>
+            <div id="blocks-list"></div>
+          </div>
+        </div>
+        <button id="btn-add-block" class="mt-4 flex items-center gap-1.5 text-sm font-semibold text-brand-orange hover:text-orange-700 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+          Añadir bloque
+        </button>
+      </div>
+
+      <!-- Anuncios -->
+      <div class="sc">
+        <div class="st">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 1 1 0-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 0 1-1.44-4.282m3.102.069a18.03 18.03 0 0 1-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 0 1 8.835 2.535M10.34 6.66a23.847 23.847 0 0 0 8.835-2.535m0 0A23.74 23.74 0 0 0 18.795 3m.38 1.125a23.91 23.91 0 0 1 1.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 0 0 1.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 0 1 0 3.46"/></svg>
+          Anuncios
+        </div>
+        <div id="anuncios-list"></div>
+        <button id="btn-add-anuncio" class="mt-3 flex items-center gap-1.5 text-sm font-semibold text-brand-orange hover:text-orange-700 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+          Añadir anuncio
+        </button>
+      </div>
+
+      <!-- Checklist MEDIA -->
+      <div class="sc">
+        <div class="st">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+          Checklist MEDIA
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-1.5" id="checklist-grid"></div>
+      </div>
+
+      <!-- Acciones -->
+      <div class="flex flex-wrap items-center gap-3 py-2 pb-12">
+        <button id="btn-new" class="px-5 py-2.5 text-sm font-semibold border border-gray-300 text-gray-500 rounded-xl hover:bg-gray-100 transition-colors flex items-center gap-2">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+          Nueva escaleta
+        </button>
+        <button id="btn-save-named" class="px-5 py-2.5 text-sm font-semibold border border-brand-brown text-brand-brown rounded-xl hover:bg-brand-cream transition-colors flex items-center gap-2">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+          Guardar
+        </button>
+        <div class="flex-1"></div>
+        <button id="btn-generate" class="px-6 py-3 bg-brand-orange text-white rounded-xl font-bold text-sm hover:bg-orange-600 transition-all hover:-translate-y-0.5 shadow-sm flex items-center gap-2">
+          Generar escaleta
+          <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── MODO VISTA PREVIA ───────────────────────────── -->
+    <div id="preview-mode" class="hidden pb-16 bg-brand-cream">
+      <div id="preview-actions" class="max-w-6xl mx-auto px-4 pt-6 flex items-center gap-3 mb-4">
+        <button id="btn-edit" class="px-5 py-2.5 text-sm font-semibold border border-brand-brown text-brand-brown rounded-xl hover:bg-brand-beige transition-all flex items-center gap-2">
+          <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/></svg>
+          Editar
+        </button>
+        <div class="flex-1"></div>
+        <button id="btn-print" class="px-6 py-3 bg-brand-orange text-white rounded-xl font-bold text-sm hover:bg-orange-600 transition-all hover:-translate-y-0.5 shadow-sm flex items-center gap-2">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.056 48.056 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z"/></svg>
+          Imprimir / Guardar PDF
+        </button>
+      </div>
+      <div id="preview-content" class="max-w-6xl mx-auto px-4"></div>
+    </div>
+
+  </div><!-- /app -->
+
+  <script>
+    const PWD = 'media2026';
+    const KEY = 'cac-escaleta-v1';
+    const SAVED_KEY = 'cac-escaletas-list';
+
+    const ROLES = [
+      'Coordinación','Dirección','Predicación','Alabanza dirige',
+      'Piano','Batería','Guitarra','Bajo','Voces',
+      'Ujieres','Sonido','Proyección','Cámaras',
+      'Transmisión','Regidora','Red de vida','EBI supervisora',
+    ];
+
+    const CHECKS = [
+      'Letras de alabanza revisadas',
+      'PPT predicación recibido',
+      'PPT predicación revisado',
+      'Carteles anuncios cargados',
+      'Vídeos cargados',
+      'Audio de vídeos revisado',
+      'Cámaras listas',
+      'Streaming configurado',
+      'Stage Display OK',
+    ];
+
+    const DEFAULT_BLOCKS = [
+      { hora:'11:30', resp:'Grupo Alabanza',     sec:'Alabanza',               dur:'35:00', notas:'El grupo de alabanza inicia el culto 3 min antes si es posible' },
+      { hora:'12:05', resp:'Dirección',           sec:'Participación',          dur:'10:00', notas:'Saludos y presentaciones / Dar paso a Comisión Dale 5 a Jesús / Oración por los niños' },
+      { hora:'12:15', resp:'Responsable',         sec:'Presentación campaña',   dur:'5:00',  notas:'Presenta a la comisión e informan de la campaña' },
+      { hora:'12:20', resp:'Dirección',           sec:'Ofrenda',                dur:'5:00',  notas:'' },
+      { hora:'12:25', resp:'Predicador',          sec:'Predicación',            dur:'40:00', notas:'Título de predicación y texto bíblico' },
+      { hora:'13:05', resp:'Responsable anuncios',sec:'Anuncios',               dur:'5:00',  notas:'' },
+      { hora:'13:10', resp:'Grupo Alabanza',      sec:'Canción de cierre',      dur:'5:00',  notas:'' },
+    ];
+
+    let blocks  = [];
+    let anuncios = [];
+
+    // ── Auth ──────────────────────────────────────────────
+
+    function init() {
+      if (sessionStorage.getItem('cac-auth') === PWD) {
+        document.getElementById('pwd-screen').classList.add('hidden');
+        showApp();
+      }
+    }
+
+    document.getElementById('pwd-btn').addEventListener('click', login);
+    document.getElementById('pwd-in').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+
+    function login() {
+      const v = document.getElementById('pwd-in').value;
+      if (v === PWD) {
+        sessionStorage.setItem('cac-auth', PWD);
+        document.getElementById('pwd-screen').classList.add('hidden');
+        showApp();
+      } else {
+        document.getElementById('pwd-err').classList.remove('hidden');
+        document.getElementById('pwd-in').value = '';
+        document.getElementById('pwd-in').focus();
+      }
+    }
+
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      sessionStorage.removeItem('cac-auth');
+      document.getElementById('app').classList.add('hidden');
+      document.getElementById('pwd-screen').classList.remove('hidden');
+      document.getElementById('pwd-err').classList.add('hidden');
+      document.getElementById('pwd-in').value = '';
+    });
+
+    // ── App init ──────────────────────────────────────────
+
+    function showApp() {
+      document.getElementById('app').classList.remove('hidden');
+      buildEquipo();
+      buildChecklist();
+      loadState();
+      renderSavedList();
+      document.getElementById('edit-mode').addEventListener('input',  scheduleSave);
+      document.getElementById('edit-mode').addEventListener('change', scheduleSave);
+    }
+
+    // ── Equipo ────────────────────────────────────────────
+
+    function buildEquipo() {
+      document.getElementById('equipo-grid').innerHTML = ROLES.map(r => `
+        <div>
+          <label class="fl">${r}</label>
+          <input type="text" class="fi eq-in" data-role="${r}" placeholder="Nombre" />
+        </div>
+      `).join('');
+    }
+
+    // ── Checklist ─────────────────────────────────────────
+
+    function buildChecklist() {
+      document.getElementById('checklist-grid').innerHTML = CHECKS.map((c, i) => `
+        <label class="ci">
+          <input type="checkbox" class="ck" data-i="${i}" />
+          <span>${c}</span>
+        </label>
+      `).join('');
+    }
+
+    // ── Blocks ────────────────────────────────────────────
+
+    function renderBlocks() {
+      const list = document.getElementById('blocks-list');
+      list.innerHTML = blocks.map((b, i) => `
+        <div class="br" data-bi="${i}">
+          <input type="text" class="fi b-hora" data-f="hora" value="${x(b.hora)}" placeholder="12:00" />
+          <input type="text" class="fi b-resp" data-f="resp" value="${x(b.resp)}" placeholder="Responsable" />
+          <input type="text" class="fi b-sec"  data-f="sec"  value="${x(b.sec)}"  placeholder="Sección" />
+          <input type="text" class="fi b-dur"  data-f="dur"  value="${x(b.dur)}"  placeholder="5:00" />
+          <input type="text" class="fi b-not"  data-f="notas" value="${x(b.notas)}" placeholder="Notas" />
+          <div class="flex gap-1 flex-wrap">
+            <button class="ba b-up"  data-bi="${i}" title="Subir"   ${i===0            ?'disabled':''}>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/></svg>
+            </button>
+            <button class="ba b-dn"  data-bi="${i}" title="Bajar"   ${i===blocks.length-1?'disabled':''}>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+            </button>
+            <button class="ba del b-del" data-bi="${i}" title="Eliminar">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      list.querySelectorAll('input').forEach(el => {
+        el.addEventListener('input', e => {
+          const i = +e.target.closest('[data-bi]').dataset.bi;
+          blocks[i][e.target.dataset.f] = e.target.value;
+          scheduleSave();
+        });
+      });
+      list.querySelectorAll('.b-up').forEach(btn => btn.addEventListener('click', () => {
+        const i = +btn.dataset.bi;
+        if (i > 0) { [blocks[i-1],blocks[i]] = [blocks[i],blocks[i-1]]; renderBlocks(); scheduleSave(); }
+      }));
+      list.querySelectorAll('.b-dn').forEach(btn => btn.addEventListener('click', () => {
+        const i = +btn.dataset.bi;
+        if (i < blocks.length-1) { [blocks[i],blocks[i+1]] = [blocks[i+1],blocks[i]]; renderBlocks(); scheduleSave(); }
+      }));
+      list.querySelectorAll('.b-del').forEach(btn => btn.addEventListener('click', () => {
+        if (blocks.length > 1) { blocks.splice(+btn.dataset.bi, 1); renderBlocks(); scheduleSave(); }
+      }));
+    }
+
+    document.getElementById('btn-add-block').addEventListener('click', () => {
+      blocks.push({ hora:'', resp:'', sec:'', dur:'', notas:'' });
+      renderBlocks();
+      scheduleSave();
+      const rows = document.querySelectorAll('#blocks-list .br');
+      rows[rows.length-1]?.querySelector('input')?.focus();
+    });
+
+    // ── Anuncios ──────────────────────────────────────────
+
+    function renderAnuncios() {
+      const list = document.getElementById('anuncios-list');
+      if (!anuncios.length) {
+        list.innerHTML = '<p class="text-sm text-gray-400 py-1">Sin anuncios. Pulsa «Añadir anuncio».</p>';
+        return;
+      }
+      list.innerHTML = anuncios.map((a, i) => `
+        <div class="bg-white rounded-xl p-4 mb-3 border border-gray-100 shadow-sm" data-ai="${i}">
+          <div class="flex items-center justify-between mb-3">
+            <span class="w-6 h-6 rounded-full bg-brand-orange text-white text-xs font-bold flex items-center justify-center">${i+1}</span>
+            <button class="ba del a-del" data-ai="${i}" title="Eliminar anuncio">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div><label class="fl">Título</label><input type="text" class="fi a-tit" data-ai="${i}" value="${x(a.tit)}" placeholder="Título del anuncio" /></div>
+            <div><label class="fl">Persona que lo comunica</label><input type="text" class="fi a-per" data-ai="${i}" value="${x(a.per)}" placeholder="Nombre" /></div>
+            <div class="md:col-span-2"><label class="fl">Texto / descripción</label><textarea class="fi a-txt" data-ai="${i}" placeholder="Detalles...">${x(a.txt)}</textarea></div>
+            <div class="md:col-span-2">
+              <label class="ci" style="background:#f9fafb;border-radius:8px;">
+                <input type="checkbox" class="a-med" data-ai="${i}" style="width:16px;height:16px;accent-color:#e8501d;" ${a.med?'checked':''} />
+                <span class="text-sm text-gray-700">Lleva cartel, imagen o vídeo</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      list.querySelectorAll('.a-tit').forEach(el => el.addEventListener('input', e => { anuncios[+e.target.dataset.ai].tit = e.target.value; scheduleSave(); }));
+      list.querySelectorAll('.a-txt').forEach(el => el.addEventListener('input', e => { anuncios[+e.target.dataset.ai].txt = e.target.value; scheduleSave(); }));
+      list.querySelectorAll('.a-per').forEach(el => el.addEventListener('input', e => { anuncios[+e.target.dataset.ai].per = e.target.value; scheduleSave(); }));
+      list.querySelectorAll('.a-med').forEach(el => el.addEventListener('change', e => { anuncios[+e.target.dataset.ai].med = e.target.checked; scheduleSave(); }));
+      list.querySelectorAll('.a-del').forEach(btn => btn.addEventListener('click', () => {
+        anuncios.splice(+btn.dataset.ai, 1); renderAnuncios(); scheduleSave();
+      }));
+    }
+
+    document.getElementById('btn-add-anuncio').addEventListener('click', () => {
+      anuncios.push({ tit:'', txt:'', per:'', med:false });
+      renderAnuncios(); scheduleSave();
+    });
+
+    // ── Persistencia ──────────────────────────────────────
+
+    let saveTimer = null;
+    function scheduleSave() { clearTimeout(saveTimer); saveTimer = setTimeout(save, 900); }
+
+    function collect() {
+      const eq = {};
+      document.querySelectorAll('.eq-in').forEach(el => { eq[el.dataset.role] = el.value; });
+      const ck = {};
+      document.querySelectorAll('.ck').forEach(el => { ck[el.dataset.i] = el.checked; });
+      return {
+        g: {
+          fecha:   document.getElementById('g-fecha').value,
+          hora:    document.getElementById('g-hora').value,
+          dur:     document.getElementById('g-dur').value,
+          dirige:  document.getElementById('g-dirige').value,
+          predica: document.getElementById('g-predica').value,
+          coordina:document.getElementById('g-coordina').value,
+          titulo:  document.getElementById('g-titulo').value,
+          texto:   document.getElementById('g-texto').value,
+          obs:     document.getElementById('g-obs').value,
+        },
+        eq, blocks, anuncios, ck,
+      };
+    }
+
+    function save() {
+      localStorage.setItem(KEY, JSON.stringify(collect()));
+      const ind = document.getElementById('save-ind');
+      ind.classList.remove('hidden');
+      clearTimeout(ind._t);
+      ind._t = setTimeout(() => ind.classList.add('hidden'), 2500);
+    }
+
+    function loadState() {
+      const raw = localStorage.getItem(KEY);
+      if (!raw) {
+        blocks = DEFAULT_BLOCKS.map(b => ({...b}));
+        anuncios = [];
+        renderBlocks(); renderAnuncios(); return;
+      }
+      try {
+        const s = JSON.parse(raw);
+        if (s.g) {
+          document.getElementById('g-fecha').value   = s.g.fecha   || '';
+          document.getElementById('g-hora').value    = s.g.hora    || '11:30';
+          document.getElementById('g-dur').value     = s.g.dur     || '105 min';
+          document.getElementById('g-dirige').value  = s.g.dirige  || '';
+          document.getElementById('g-predica').value = s.g.predica || '';
+          document.getElementById('g-coordina').value= s.g.coordina|| '';
+          document.getElementById('g-titulo').value  = s.g.titulo  || '';
+          document.getElementById('g-texto').value   = s.g.texto   || '';
+          document.getElementById('g-obs').value     = s.g.obs     || '';
+        }
+        if (s.eq) document.querySelectorAll('.eq-in').forEach(el => { el.value = s.eq[el.dataset.role] || ''; });
+        if (s.ck) document.querySelectorAll('.ck').forEach(el => { el.checked = !!s.ck[el.dataset.i]; });
+        blocks   = s.blocks?.length ? s.blocks : DEFAULT_BLOCKS.map(b => ({...b}));
+        anuncios = s.anuncios || [];
+      } catch { blocks = DEFAULT_BLOCKS.map(b => ({...b})); anuncios = []; }
+      renderBlocks(); renderAnuncios();
+    }
+
+    // ── Escaletas guardadas ───────────────────────────────
+
+    function getSavedList() {
+      try { return JSON.parse(localStorage.getItem(SAVED_KEY) || '[]'); }
+      catch { return []; }
+    }
+
+    function renderSavedList() {
+      const list = getSavedList();
+      const container = document.getElementById('saved-list');
+      const empty     = document.getElementById('saved-empty');
+      if (!list.length) {
+        empty.classList.remove('hidden');
+        container.querySelectorAll('.sv-card').forEach(el => el.remove());
+        return;
+      }
+      empty.classList.add('hidden');
+      container.querySelectorAll('.sv-card').forEach(el => el.remove());
+      list.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'sv-card flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-3.5 py-2.5 shadow-sm cursor-pointer hover:border-brand-orange hover:shadow transition-all';
+        card.title = 'Abrir para editar';
+        card.innerHTML = `
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-bold text-brand-brown leading-tight truncate max-w-[200px]">${e(item.name)}</div>
+            <div class="text-xs text-gray-400 mt-0.5">${relTime(item.savedAt)}</div>
+          </div>
+          <button class="ba del sv-del" data-id="${item.id}" title="Eliminar">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+          </button>
+        `;
+        card.addEventListener('click', (ev) => {
+          if (ev.target.closest('.sv-del')) return;
+          loadNamed(item.id);
+        });
+        card.querySelector('.sv-del').addEventListener('click', () => deleteNamed(item.id));
+        container.appendChild(card);
+      });
+    }
+
+    function saveNamed(name) {
+      const list = getSavedList();
+      const id   = Date.now().toString();
+      list.push({ id, name, savedAt: new Date().toISOString(), data: collect() });
+      localStorage.setItem(SAVED_KEY, JSON.stringify(list));
+      renderSavedList();
+    }
+
+    function loadNamed(id) {
+      const list = getSavedList();
+      const item = list.find(i => i.id === id);
+      if (!item) return;
+      const s = item.data;
+      if (s.g) {
+        document.getElementById('g-fecha').value    = s.g.fecha    || '';
+        document.getElementById('g-hora').value     = s.g.hora     || '11:30';
+        document.getElementById('g-dur').value      = s.g.dur      || '105 min';
+        document.getElementById('g-dirige').value   = s.g.dirige   || '';
+        document.getElementById('g-predica').value  = s.g.predica  || '';
+        document.getElementById('g-coordina').value = s.g.coordina || '';
+        document.getElementById('g-titulo').value   = s.g.titulo   || '';
+        document.getElementById('g-texto').value    = s.g.texto    || '';
+        document.getElementById('g-obs').value      = s.g.obs      || '';
+      }
+      if (s.eq) document.querySelectorAll('.eq-in').forEach(el => { el.value = s.eq[el.dataset.role] || ''; });
+      if (s.ck) document.querySelectorAll('.ck').forEach(el => { el.checked = !!s.ck[el.dataset.i]; });
+      blocks   = s.blocks?.length ? s.blocks : DEFAULT_BLOCKS.map(b => ({...b}));
+      anuncios = s.anuncios || [];
+      renderBlocks(); renderAnuncios();
+      save();
+      // Volver siempre al modo edición
+      document.getElementById('preview-mode').classList.add('hidden');
+      document.getElementById('edit-mode').classList.remove('hidden');
+      // Indicar qué escaleta está activa en la barra superior
+      const ind = document.getElementById('save-ind');
+      ind.textContent = `✓ ${item.name}`;
+      ind.classList.remove('hidden');
+      clearTimeout(ind._t);
+      ind._t = setTimeout(() => ind.classList.add('hidden'), 3000);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function deleteNamed(id) {
+      const list = getSavedList();
+      const item = list.find(i => i.id === id);
+      if (!item) return;
+      if (!confirm(`¿Eliminar "${item.name}"?`)) return;
+      localStorage.setItem(SAVED_KEY, JSON.stringify(list.filter(i => i.id !== id)));
+      renderSavedList();
+    }
+
+    function relTime(iso) {
+      const diff = Date.now() - new Date(iso).getTime();
+      const m = Math.floor(diff / 60000);
+      const h = Math.floor(m / 60);
+      const d = Math.floor(h / 24);
+      if (d > 0) return `hace ${d} día${d>1?'s':''}`;
+      if (h > 0) return `hace ${h} hora${h>1?'s':''}`;
+      if (m > 0) return `hace ${m} min`;
+      return 'ahora mismo';
+    }
+
+    document.getElementById('btn-save-named').addEventListener('click', () => {
+      const g = collect().g;
+      const def = g.fecha
+        ? `${g.hora||'11:30'} · ${fmtDate(g.fecha)}`
+        : `Escaleta ${new Date().toLocaleDateString('es-ES')}`;
+      const name = prompt('Nombre para esta escaleta:', def);
+      if (!name?.trim()) return;
+      saveNamed(name.trim());
+    });
+
+    document.getElementById('btn-new').addEventListener('click', () => {
+      if (!confirm('¿Empezar una nueva escaleta?\nGuarda la actual con «Guardar» si quieres conservarla.')) return;
+      localStorage.removeItem(KEY);
+      ['g-fecha','g-dirige','g-predica','g-coordina','g-titulo','g-texto','g-obs'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      document.getElementById('g-hora').value = '11:30';
+      document.getElementById('g-dur').value  = '105 min';
+      document.querySelectorAll('.eq-in').forEach(el => el.value = '');
+      document.querySelectorAll('.ck').forEach(el => el.checked = false);
+      blocks = DEFAULT_BLOCKS.map(b => ({...b}));
+      anuncios = [];
+      renderBlocks(); renderAnuncios();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ── Limpiar (interno, ya no expuesto en UI) ───────────
+
+
+    // ── Generar / Preview ─────────────────────────────────
+
+    document.getElementById('btn-generate').addEventListener('click', () => {
+      save();
+      document.getElementById('edit-mode').classList.add('hidden');
+      document.getElementById('preview-mode').classList.remove('hidden');
+      document.getElementById('preview-content').innerHTML = buildPreview(collect());
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    document.getElementById('btn-edit').addEventListener('click', () => {
+      document.getElementById('preview-mode').classList.add('hidden');
+      document.getElementById('edit-mode').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    document.getElementById('btn-print').addEventListener('click', () => window.print());
+
+    // ── HTML de la escaleta ───────────────────────────────
+
+    function buildPreview(s) {
+      const g = s.g;
+      const fecha = g.fecha ? fmtDate(g.fecha) : '—';
+
+      const BCOLORS = ['#e8501d','#98211e','#d97706','#22c55e','#818cf8','#0ea5e9','#f472b6'];
+
+      // Helper: card clara
+      const card = (html, extra='') =>
+        `<div style="background:white;border:1px solid #e8e2d9;border-radius:14px;padding:13px 15px;box-sizing:border-box;${extra}">${html}</div>`;
+
+      // Helper: título de sección
+      const stitle = (t) =>
+        `<div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#e8501d;margin-bottom:9px;display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:12px;height:2.5px;border-radius:2px;background:#e8501d;flex-shrink:0;"></span>${t}</div>`;
+
+      // Chips de cabecera (sobre fondo oscuro)
+      const chips = [
+        { l:'Predica',  v: g.predica  || '—' },
+        { l:'Dirige',   v: g.dirige   || '—' },
+        { l:'Coordina', v: g.coordina || '—' },
+        { l:'Duración', v: g.dur      || '—', accent: true },
+      ].map(c => `
+        <div style="background:${c.accent?'rgba(232,80,29,.22)':'rgba(255,255,255,.1)'};border:1px solid ${c.accent?'rgba(232,80,29,.4)':'rgba(255,255,255,.18)'};border-radius:10px;padding:7px 12px;min-width:76px;">
+          <div style="font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:${c.accent?'#fba585':'rgba(255,255,255,.48)'};margin-bottom:2px;">${c.l}</div>
+          <div style="font-size:12px;font-weight:700;color:white;">${e(c.v)}</div>
+        </div>
+      `).join('');
+
+      // Predicación en cabecera
+      const predInHeader = (g.titulo||g.texto) ? `
+        <div style="background:rgba(232,80,29,.14);border:1px solid rgba(232,80,29,.28);border-radius:9px;padding:7px 12px;margin-top:8px;display:inline-block;">
+          <div style="font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:rgba(232,80,29,.9);margin-bottom:2px;">Predicación</div>
+          <div style="font-size:13px;font-weight:800;color:white;margin-bottom:1px;">${e(g.titulo||'—')}</div>
+          ${g.texto?`<div style="font-size:10px;color:rgba(255,255,255,.52);">${e(g.texto)}</div>`:''}
+        </div>
+      ` : '';
+
+      // Bloques escaleta
+      const blockHTML = s.blocks.map((b,i) => `
+        <div style="background:#faf8f4;border-radius:10px;padding:8px 12px;display:flex;align-items:center;gap:10px;border:1px solid #ede8df;">
+          <div style="width:3.5px;min-height:36px;border-radius:3px;background:${BCOLORS[i%BCOLORS.length]};flex-shrink:0;align-self:stretch;"></div>
+          <div style="min-width:50px;">
+            <div style="font-size:7px;color:#b0a090;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1px;">Hora</div>
+            <div style="font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1;color:#401c14;">${e(b.hora)}</div>
+          </div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-weight:700;font-size:12px;color:#1f0e08;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${e(b.sec)}</div>
+            <div style="font-size:10px;color:#78716c;margin-top:1px;">${e(b.resp)}${b.dur?' · '+e(b.dur):''}</div>
+          </div>
+          ${b.notas?`<div style="background:#f4f0e4;border:1px solid #ddd8d0;border-radius:6px;padding:3px 8px;font-size:9px;color:#78716c;max-width:175px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0;" title="${e(b.notas)}">${e(b.notas)}</div>`:''}
+        </div>
+      `).join('');
+
+      // Anuncios
+      const anuncioHTML = s.anuncios.length ? s.anuncios.map((a,i) => `
+        <div style="border-left:3px solid #e8501d;padding:7px 10px;border-radius:0 8px 8px 0;background:#faf8f4;margin-bottom:5px;">
+          <div style="font-weight:700;font-size:11px;margin-bottom:2px;color:#1f0e08;">${i+1}. ${e(a.tit||'Sin título')}</div>
+          ${a.txt?`<div style="font-size:10px;color:#6b7280;margin-bottom:3px;white-space:pre-wrap;">${e(a.txt)}</div>`:''}
+          <div style="display:flex;gap:5px;flex-wrap:wrap;">
+            ${a.per?`<span style="background:#f4f0e4;border:1px solid #ddd8d0;padding:1px 7px;border-radius:100px;font-size:9px;color:#78716c;font-weight:600;">Comunica: ${e(a.per)}</span>`:''}
+            ${a.med?`<span style="background:#fff3ed;border:1px solid #fbd0c0;padding:1px 7px;border-radius:100px;font-size:9px;color:#c2410c;font-weight:600;">Cartel/vídeo</span>`:''}
+          </div>
+        </div>
+      `).join('') : `<p style="font-size:10px;color:#b0a090;margin:0;">Sin anuncios registrados.</p>`;
+
+      // Observaciones
+      const obsHTML = g.obs ? `
+        <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:9px;padding:8px 11px;margin-top:8px;">
+          <div style="font-size:8px;text-transform:uppercase;letter-spacing:.05em;color:#b45309;margin-bottom:3px;">Observaciones</div>
+          <div style="font-size:10px;color:#78350f;white-space:pre-wrap;">${e(g.obs)}</div>
+        </div>
+      ` : '';
+
+      // Equipo en 2 columnas
+      const halfLen = Math.ceil(ROLES.length / 2);
+      const eqCol = (roles) => roles.map(r => {
+        const n = s.eq[r] || '';
+        return `<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid #f3ede6;">
+          <span style="font-size:9px;color:#b0a090;text-transform:uppercase;letter-spacing:.04em;">${e(r)}</span>
+          <span style="font-size:11px;font-weight:700;color:${n?'#401c14':'#d9d0c7'};">${n?e(n):'—'}</span>
+        </div>`;
+      }).join('');
+
+      // Checklist
+      const checkHTML = CHECKS.map((c,i) => {
+        const ok = !!s.ck[i];
+        return `<div style="display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:8px;background:${ok?'#f0fdf4':'#faf8f4'};border:1px solid ${ok?'#bbf7d0':'#ede8df'};">
+          <div style="width:13px;height:13px;border-radius:3px;flex-shrink:0;${ok?'background:#22c55e;':'border:1.5px solid #c8beb4;'}display:flex;align-items:center;justify-content:center;">
+            ${ok?'<svg style="width:8px;height:8px;" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>':''}
+          </div>
+          <span style="font-size:10px;font-weight:500;color:${ok?'#166534':'#78716c'};">${e(c)}</span>
+        </div>`;
+      }).join('');
+
+      const footer = `<div style="text-align:center;font-size:8px;color:#c4b9ad;margin-top:10px;">Comunidad de Amor Cristiano · Equipo MEDIA · Generado el ${new Date().toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'})}</div>`;
+
+      return `
+        <div style="background:#f4f0e4;font-family:'Inter',system-ui,sans-serif;color:#1f0e08;box-sizing:border-box;">
+
+          <!-- ══ HOJA 1: Escaleta + Anuncios ══ -->
+          <div style="padding:14px;page-break-after:always;">
+
+            <!-- Cabecera oscura -->
+            <div style="background:#401c14;border-radius:14px;padding:13px 18px;margin-bottom:10px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+              <div>
+                <div style="font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:4px;">Escaleta · Culto CAC · MEDIA Interno</div>
+                <h1 style="font-size:18px;font-weight:800;color:white;margin:0;line-height:1.2;">Domingo Mañana · ${e(fecha)} · ${e(g.hora||'11:30')} h</h1>
+                ${predInHeader}
+              </div>
+              <div style="display:flex;gap:7px;flex-wrap:wrap;">${chips}</div>
+            </div>
+
+            <!-- Escaleta | Anuncios -->
+            <div style="display:grid;grid-template-columns:3fr 2fr;gap:9px;">
+              ${card(`${stitle('Escaleta Operativa')}<div style="display:flex;flex-direction:column;gap:6px;">${blockHTML}</div>`)}
+              ${card(`${stitle('Anuncios')}${anuncioHTML}${obsHTML}`)}
+            </div>
+
+            ${footer}
+          </div>
+
+          <!-- Separador en pantalla -->
+          <div class="screen-sep" style="height:2px;background:linear-gradient(to right,transparent,#ddd8d0,transparent);margin:0 14px 2px;"></div>
+
+          <!-- ══ HOJA 2: Equipo + Checklist ══ -->
+          <div style="padding:14px;">
+
+            <!-- Mini cabecera página 2 -->
+            <div style="background:#401c14;border-radius:12px;padding:10px 16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;">
+              <div>
+                <div style="font-size:8px;text-transform:uppercase;letter-spacing:.09em;color:rgba(255,255,255,.35);">MEDIA Interno · Hoja 2</div>
+                <div style="font-size:13px;font-weight:700;color:white;margin-top:2px;">Equipo y Checklist — ${e(fecha)}</div>
+              </div>
+              <div style="display:flex;gap:6px;">
+                <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:6px 11px;">
+                  <div style="font-size:7px;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.4);margin-bottom:1px;">Predica</div>
+                  <div style="font-size:11px;font-weight:700;color:white;">${e(g.predica||'—')}</div>
+                </div>
+                <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:6px 11px;">
+                  <div style="font-size:7px;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.4);margin-bottom:1px;">Dirige</div>
+                  <div style="font-size:11px;font-weight:700;color:white;">${e(g.dirige||'—')}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Equipo | Checklist -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
+              ${card(`${stitle('Equipo')}<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 18px;"><div>${eqCol(ROLES.slice(0,halfLen))}</div><div>${eqCol(ROLES.slice(halfLen))}</div></div>`)}
+              ${card(`${stitle('Checklist MEDIA')}<div style="display:flex;flex-direction:column;gap:4px;">${checkHTML}</div>`)}
+            </div>
+
+            ${footer}
+          </div>
+
+        </div>
+      `;
+    }
+
+    // ── Utilidades ────────────────────────────────────────
+
+    function e(s) {
+      if (!s) return '';
+      return String(s)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+    function x(s) { return e(s); } // alias para atributos HTML
+
+    function fmtDate(iso) {
+      const [y,m,d] = iso.split('-');
+      const days   = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+      const months = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+      const dt = new Date(iso + 'T00:00:00');
+      return `${days[dt.getDay()]} ${+d} de ${months[+m-1]} de ${y}`;
+    }
+
+    // ── Arranque ──────────────────────────────────────────
+    init();
+  </script>
+</body>
+</html>
