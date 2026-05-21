@@ -49,7 +49,7 @@ import '../../styles/theme.css';
     /* ── Bloques ─────────────────────────────────────────── */
     .bh, .br {
       display: grid;
-      grid-template-columns: 76px 1fr 1fr 76px 1fr 76px;
+      grid-template-columns: 76px 1fr 1fr 76px 1fr 80px;
       gap: 6px;
       align-items: start;
     }
@@ -57,6 +57,32 @@ import '../../styles/theme.css';
     .bh span { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #9ca3af; }
     .br { padding: 8px 0; border-bottom: 1px solid #f3f4f6; }
     .br:last-child { border-bottom: none; }
+
+    /* ── Bloques — móvil ─────────────────────────────────── */
+    @media (max-width: 639px) {
+      .bh { display: none; }
+      .br {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+        background: white;
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 8px;
+        border: 1px solid #e8e2d9 !important;
+      }
+      .br .b-sec,
+      .br .b-resp,
+      .br .b-not,
+      .br .br-act { grid-column: 1 / -1; }
+      .br .br-act { display: flex; justify-content: flex-end; gap: 4px; }
+    }
+
+    /* ── Tarjetas guardadas — móvil ──────────────────────── */
+    @media (max-width: 639px) {
+      #saved-list { flex-direction: column; }
+      .sv-card { width: 100%; }
+    }
 
     /* ── Botones de acción pequeños ──────────────────────── */
     .ba {
@@ -257,15 +283,11 @@ import '../../styles/theme.css';
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z"/></svg>
           Bloques de la escaleta
         </div>
-        <div class="overflow-x-auto">
-          <div style="min-width:680px;">
-            <div class="bh">
-              <span>Hora</span><span>Responsable</span><span>Sección</span>
-              <span>Duración</span><span>Notas</span><span></span>
-            </div>
-            <div id="blocks-list"></div>
-          </div>
+        <div class="bh hidden sm:grid">
+          <span>Hora</span><span>Responsable</span><span>Sección</span>
+          <span>Duración</span><span>Notas</span><span></span>
         </div>
+        <div id="blocks-list"></div>
         <button id="btn-add-block" class="mt-4 flex items-center gap-1.5 text-sm font-semibold text-brand-orange hover:text-orange-700 transition-colors">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
           Añadir bloque
@@ -295,17 +317,19 @@ import '../../styles/theme.css';
       </div>
 
       <!-- Acciones -->
-      <div class="flex flex-wrap items-center gap-3 py-2 pb-12">
-        <button id="btn-new" class="px-5 py-2.5 text-sm font-semibold border border-gray-300 text-gray-500 rounded-xl hover:bg-gray-100 transition-colors flex items-center gap-2">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-          Nueva escaleta
-        </button>
-        <button id="btn-save-named" class="px-5 py-2.5 text-sm font-semibold border border-brand-brown text-brand-brown rounded-xl hover:bg-brand-cream transition-colors flex items-center gap-2">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
-          Guardar
-        </button>
-        <div class="flex-1"></div>
-        <button id="btn-generate" class="px-6 py-3 bg-brand-orange text-white rounded-xl font-bold text-sm hover:bg-orange-600 transition-all hover:-translate-y-0.5 shadow-sm flex items-center gap-2">
+      <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 py-2 pb-12">
+        <div class="flex gap-2">
+          <button id="btn-new" class="flex-1 sm:flex-none px-5 py-2.5 text-sm font-semibold border border-gray-300 text-gray-500 rounded-xl hover:bg-gray-100 transition-colors flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+            Nueva
+          </button>
+          <button id="btn-save-named" class="flex-1 sm:flex-none px-5 py-2.5 text-sm font-semibold border border-brand-brown text-brand-brown rounded-xl hover:bg-brand-cream transition-colors flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+            Guardar
+          </button>
+        </div>
+        <div class="hidden sm:block flex-1"></div>
+        <button id="btn-generate" class="w-full sm:w-auto px-6 py-3 bg-brand-orange text-white rounded-xl font-bold text-sm hover:bg-orange-600 transition-all hover:-translate-y-0.5 shadow-sm flex items-center justify-center gap-2">
           Generar escaleta
           <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
         </button>
@@ -445,7 +469,7 @@ import '../../styles/theme.css';
           <input type="text" class="fi b-sec"  data-f="sec"  value="${x(b.sec)}"  placeholder="Sección" />
           <input type="text" class="fi b-dur"  data-f="dur"  value="${x(b.dur)}"  placeholder="5:00" />
           <input type="text" class="fi b-not"  data-f="notas" value="${x(b.notas)}" placeholder="Notas" />
-          <div class="flex gap-1 flex-wrap">
+          <div class="br-act">
             <button class="ba b-up"  data-bi="${i}" title="Subir"   ${i===0            ?'disabled':''}>
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/></svg>
             </button>
