@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import dale5Logo from '../assets/images/dale5_logo.svg';
+import dale5Cierre from '../assets/images/dale5_cierre.png';
 
 const habits = [
   {
@@ -86,6 +87,94 @@ const prayerPoints = [
           <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
         </svg>
       </a>
+    </div>
+  </section>
+
+  <!-- ── Cierre de Campaña ────────────────────────────── -->
+  <section class="bg-brand-cream py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+        <!-- Cartel -->
+        <div class="flex justify-center lg:justify-end">
+          <Image
+            src={dale5Cierre}
+            alt="Cartel Semana de Cierre Dale 5 — Ángel Rodríguez y Kelly Pisa"
+            class="w-full max-w-xs rounded-3xl shadow-2xl"
+          />
+        </div>
+
+        <!-- Info -->
+        <div class="flex flex-col gap-8">
+          <div>
+            <span class="inline-block text-brand-orange font-semibold text-sm uppercase tracking-widest mb-3">
+              Semana de cierre · 19–21 de junio
+            </span>
+            <h2 class="text-4xl md:text-5xl font-extrabold text-brand-brown leading-tight mb-5">
+              Ángel Rodríguez<br class="hidden md:block" /> & Kelly Pisa
+            </h2>
+            <p class="text-gray-600 text-lg leading-relaxed">
+              Tres días para que la oración que has sembrado dé fruto. Prepara tu corazón, afila tu testimonio y abre la puerta a las personas por las que has estado creyendo.
+            </p>
+          </div>
+
+          <!-- Los tres días -->
+          <div class="flex flex-col gap-3">
+
+            <!-- Viernes -->
+            <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm">
+              <div class="flex-none text-center w-14">
+                <span class="inline-block bg-brand-orange text-white text-xs font-extrabold uppercase rounded-full px-3 py-1">Vie 19</span>
+                <p class="text-gray-400 text-xs font-semibold mt-1.5">19:30</p>
+              </div>
+              <div>
+                <h3 class="font-extrabold text-brand-brown text-base leading-snug">Reunión especial</h3>
+                <p class="text-gray-500 text-sm mt-1 leading-relaxed">Una noche para la iglesia. Nos preparamos juntos y entramos en la semana de cierre como comunidad.</p>
+              </div>
+            </div>
+
+            <!-- Sábado -->
+            <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm ring-1 ring-brand-orange/40">
+              <div class="flex-none text-center w-14">
+                <span class="inline-block bg-brand-orange text-white text-xs font-extrabold uppercase rounded-full px-3 py-1">Sáb 20</span>
+                <p class="text-gray-400 text-xs font-semibold mt-1.5">10:00</p>
+              </div>
+              <div class="flex-1">
+                <h3 class="font-extrabold text-brand-brown text-base leading-snug">Taller de evangelismo y apologética</h3>
+                <p class="text-gray-500 text-sm mt-1 leading-relaxed mb-3">Formación práctica para compartir tu fe con confianza y responder preguntas difíciles.</p>
+                <div class="flex items-center gap-3 flex-wrap">
+                  <a
+                    href="https://forms.gle/Nmg31yzRNWj7NLbC7"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 px-4 py-2 bg-brand-orange text-white rounded-full font-bold text-xs hover:bg-orange-600 transition-all duration-200"
+                  >
+                    Inscribirme
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                  </a>
+                  <span class="text-xs text-gray-400">Donativo de 5 €</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Domingo -->
+            <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm">
+              <div class="flex-none text-center w-14">
+                <span class="inline-block bg-brand-orange text-white text-xs font-extrabold uppercase rounded-full px-3 py-1">Dom 21</span>
+                <p class="text-gray-400 text-xs font-semibold mt-1.5">11:30</p>
+              </div>
+              <div>
+                <h3 class="font-extrabold text-brand-brown text-base leading-snug">Reunión especial</h3>
+                <p class="text-gray-500 text-sm mt-1 leading-relaxed">El momento para el que has estado orando. Trae a las personas por las que has creído — esta reunión es para ellas.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
