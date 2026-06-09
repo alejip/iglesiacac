@@ -416,7 +416,7 @@ import '../../styles/theme.css';
       }
     }
 
-    document.getElementById('btn-logout').addEventListener('click', () => {
+    document.getElementById('btn-logout')?.addEventListener('click', () => {
       sessionStorage.removeItem('cac-auth');
       document.getElementById('app').classList.add('hidden');
       document.getElementById('pwd-screen').classList.remove('hidden');
