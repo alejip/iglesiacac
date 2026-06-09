@@ -11,7 +11,7 @@ const formatTime = (ms: number): string => {
 };
 
 export const POST: APIRoute = async ({ request }) => {
-  const ANTHROPIC_KEY = import.meta.env.ANTHROPIC_API_KEY;
+  const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY ?? import.meta.env.ANTHROPIC_API_KEY;
   if (!ANTHROPIC_KEY) {
     return new Response(JSON.stringify({ error: 'Clave de API no configurada en el servidor.' }), { status: 500 });
   }
