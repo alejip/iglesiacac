@@ -1,0 +1,516 @@
+---
+import '../styles/theme.css';
+export const prerender = true;
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Analizador de Predicaciones — MEDIA · CAC</title>
+  <link rel="icon" type="image/png" href="/images/logo-llama.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" />
+  <style is:global>
+    /* ── Reset base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* ── Variables CAC ──────────────────────────────────────── */
+    :root {
+      --brown:  #401c14;
+      --orange: #e8501d;
+      --red:    #98211e;
+      --cream:  #f4f0e4;
+      --beige:  #ddd8d0;
+      --text:   #111827;
+      --text2:  #6b7280;
+      --text3:  #9ca3af;
+    }
+
+    /* ── Inputs ─────────────────────────────────────────────── */
+    .fi {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--text);
+      background: white;
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .fi:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(232,80,29,.1); }
+
+    /* ── Sección card ───────────────────────────────────────── */
+    .sc { background: var(--cream); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+    .st {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--orange); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    /* ── Categorías colors ──────────────────────────────────── */
+    .cat-llamada     { --cat: #e8501d; }
+    .cat-revelacion  { --cat: #6366f1; }
+    .cat-ilustracion { --cat: #059669; }
+    .cat-versiculo   { --cat: #7c3aed; }
+    .cat-promesa     { --cat: #0284c7; }
+    .cat-desafio     { --cat: var(--red); }
+    .cat-transicion  { --cat: #9ca3af; }
+
+    /* ── Chips de filtro ────────────────────────────────────── */
+    .chip {
+      padding: 5px 14px; border-radius: 100px; font-size: 12px; font-weight: 600;
+      border: 1.5px solid var(--beige); background: white; cursor: pointer;
+      color: var(--text2); transition: all .15s; white-space: nowrap;
+    }
+    .chip:hover { border-color: var(--orange); color: var(--orange); }
+    .chip.active { background: var(--orange); border-color: var(--orange); color: white; }
+
+    /* ── Botones ────────────────────────────────────────────── */
+    .btn-primary {
+      width: 100%; padding: 14px; border-radius: 12px; border: none;
+      background: var(--orange); color: white; font-size: 15px; font-weight: 700;
+      cursor: pointer; font-family: inherit; transition: background .15s, transform .1s;
+    }
+    .btn-primary:hover { background: #d44519; }
+    .btn-primary:active { transform: scale(.98); }
+    .btn-primary:disabled { background: #e5e7eb; color: var(--text3); cursor: not-allowed; }
+
+    .btn-secondary {
+      padding: 8px 16px; border-radius: 10px; border: 1.5px solid var(--beige);
+      background: white; color: var(--text2); font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: inherit; transition: all .15s; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* ── Tarjeta de momento ─────────────────────────────────── */
+    .momento-card {
+      background: white; border-radius: 14px; padding: 18px 20px;
+      border-left: 4px solid var(--cat, var(--orange));
+      border-top: 1px solid #f3f4f6; border-right: 1px solid #f3f4f6; border-bottom: 1px solid #f3f4f6;
+      margin-bottom: 10px;
+    }
+    .cat-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 10px; border-radius: 100px; font-size: 10px; font-weight: 700;
+      background: color-mix(in srgb, var(--cat, var(--orange)) 12%, white);
+      color: var(--cat, var(--orange)); text-transform: uppercase; letter-spacing: .06em;
+    }
+    .ts-link {
+      font-size: 11px; font-weight: 600; color: var(--orange);
+      text-decoration: none; display: inline-flex; align-items: center; gap: 3px;
+    }
+    .ts-link:hover { text-decoration: underline; }
+    .score-bars { display: flex; align-items: flex-end; gap: 2px; }
+    .score-bar { width: 4px; border-radius: 2px; }
+    .texto-momento {
+      font-size: 15px; line-height: 1.75; color: var(--text); font-style: italic;
+      margin: 12px 0 8px; border-left: 2px solid var(--beige); padding-left: 14px;
+    }
+    .razon-momento { font-size: 12px; color: var(--text2); }
+
+    /* ── Clip card ──────────────────────────────────────────── */
+    .clip-card {
+      background: white; border-radius: 12px; padding: 16px 18px;
+      border: 1px solid #f3f4f6; margin-bottom: 8px;
+    }
+    .clip-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 6px; }
+    .clip-num { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); }
+    .clip-fragmento { font-size: 13px; font-style: italic; color: var(--text2); line-height: 1.6; margin-bottom: 6px; }
+    .clip-razon { font-size: 11px; color: var(--text3); }
+
+    /* ── Loading ────────────────────────────────────────────── */
+    .spinner {
+      width: 44px; height: 44px; border: 3px solid var(--beige);
+      border-top-color: var(--orange); border-radius: 50%;
+      animation: spin .9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp .35s ease both; }
+
+    /* ── Error ──────────────────────────────────────────────── */
+    .error-card {
+      background: #fef2f2; border: 1px solid #fecaca; border-radius: 14px;
+      padding: 20px 22px; color: #dc2626;
+    }
+
+    /* ── Toggle acordeón ────────────────────────────────────── */
+    .help-toggle { font-size: 12px; color: var(--orange); cursor: pointer; background: none; border: none; font-family: inherit; padding: 0; text-decoration: underline; }
+    .help-body { overflow: hidden; max-height: 0; transition: max-height .3s ease; }
+    .help-body.open { max-height: 200px; }
+    .help-content { margin-top: 10px; background: white; border-radius: 10px; padding: 12px 14px; font-size: 13px; color: var(--text2); line-height: 1.75; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen" style="font-family:'Inter',sans-serif;margin:0;">
+
+  <!-- ── PANTALLA DE CONTRASEÑA ──────────────────────────── -->
+  <div id="pwd-screen" class="fixed inset-0 z-50 flex items-center justify-center px-4" style="background:#401c14;">
+    <div class="w-full max-w-sm">
+      <div class="text-center mb-8">
+        <img src="/images/logo-llama.png" alt="CAC" class="h-10 w-auto mx-auto mb-5 opacity-80" />
+        <span class="inline-block text-xs font-bold uppercase tracking-widest rounded-full px-4 py-1.5 mb-4" style="background:rgba(255,255,255,.12);color:rgba(255,255,255,.75);">
+          Uso interno · Equipo MEDIA
+        </span>
+        <h1 class="text-3xl font-extrabold text-white mb-2">Clips Predicación</h1>
+        <p class="text-sm" style="color:rgba(255,255,255,.45);">Introduce la contraseña para acceder</p>
+      </div>
+      <div class="rounded-2xl p-6" style="background:rgba(255,255,255,.1);">
+        <label class="block text-xs font-bold uppercase tracking-widest mb-2" style="color:rgba(255,255,255,.5);">Contraseña</label>
+        <input id="pwd-in" type="password" placeholder="••••••••"
+          class="w-full px-4 py-3 rounded-xl text-sm font-medium outline-none transition-all"
+          style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.15);color:white;"
+          autocomplete="current-password" />
+        <p id="pwd-err" class="text-xs mt-2 hidden" style="color:#fca5a5;">Contraseña incorrecta</p>
+        <button id="pwd-btn" class="mt-4 w-full py-3 rounded-xl font-bold text-sm transition-colors" style="background:var(--orange);color:white;">
+          Entrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── APP ─────────────────────────────────────────────── -->
+  <div id="app" class="hidden">
+
+    <!-- Header -->
+    <header style="background:var(--brown);padding:14px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:40;box-shadow:0 2px 12px rgba(0,0,0,.2);">
+      <img src="/images/logo-llama.png" alt="CAC" style="height:32px;width:auto;opacity:.9;" />
+      <div style="flex:1;">
+        <div style="font-size:16px;font-weight:800;color:white;line-height:1;">Analizador de Predicaciones</div>
+        <div style="font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:2px;">MEDIA · CAC</div>
+      </div>
+      <span style="font-size:11px;background:rgba(232,80,29,.25);color:rgba(255,200,180,.9);padding:3px 10px;border-radius:100px;border:1px solid rgba(232,80,29,.35);">IA · Claude</span>
+    </header>
+
+    <!-- Main -->
+    <main style="max-width:780px;margin:0 auto;padding:28px 16px 64px;">
+
+      <!-- ── PASO: INPUT ───────────────────────────────────── -->
+      <div id="step-input" class="fade-up">
+        <div style="margin-bottom:24px;">
+          <h1 style="font-size:clamp(22px,5vw,32px);font-weight:800;color:var(--brown);line-height:1.2;margin-bottom:8px;">
+            Pega el enlace<br /><span style="color:var(--orange);">de la predicación</span>
+          </h1>
+          <p style="font-size:14px;color:var(--text2);line-height:1.65;max-width:520px;">
+            Claude analiza la transcripción e identifica los momentos más poderosos del mensaje — listos para reutilizar en redes.
+          </p>
+        </div>
+
+        <div class="sc">
+          <div class="st">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
+            Enlace de YouTube
+          </div>
+          <input id="inp-url" type="url" class="fi" placeholder="https://youtube.com/watch?v=..." style="margin-bottom:20px;" />
+
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+            <div class="st" style="margin-bottom:0;">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 0 1 21.75 8.25Z"/></svg>
+              API Key · Supadata
+            </div>
+            <button class="help-toggle" id="help-toggle-btn">¿Cómo obtenerla?</button>
+          </div>
+          <div class="help-body" id="help-body">
+            <div class="help-content">
+              1. Ve a <strong style="color:var(--orange);">supadata.ai</strong> → Sign up gratis<br />
+              2. Dashboard → API Keys → crear una nueva<br />
+              3. <strong style="color:var(--orange);">100 peticiones/mes gratuitas</strong> — suficiente para ~100 predicaciones<br />
+              Tu clave se guarda en el navegador para que no la vuelvas a introducir.
+            </div>
+          </div>
+          <input id="inp-key" type="password" class="fi" placeholder="sup_xxxxxxxxxxxxxxxx" style="margin:8px 0 22px;font-family:monospace;" />
+
+          <button id="btn-analyze" class="btn-primary" disabled>
+            Analizar predicación →
+          </button>
+        </div>
+      </div>
+
+      <!-- ── PASO: LOADING ─────────────────────────────────── -->
+      <div id="step-loading" class="hidden" style="text-align:center;padding:80px 0;">
+        <div style="display:flex;justify-content:center;margin-bottom:20px;">
+          <div class="spinner"></div>
+        </div>
+        <div id="load-title" style="font-size:18px;font-weight:700;color:var(--brown);margin-bottom:6px;"></div>
+        <div id="load-sub" style="font-size:13px;color:var(--text3);"></div>
+      </div>
+
+      <!-- ── PASO: ERROR ───────────────────────────────────── -->
+      <div id="step-error" class="hidden fade-up">
+        <div class="error-card">
+          <div style="font-weight:700;margin-bottom:8px;">⚠️ Ha ocurrido un error</div>
+          <div id="error-msg" style="font-size:14px;color:#b91c1c;line-height:1.5;"></div>
+          <button id="btn-retry" class="btn-secondary" style="margin-top:16px;">← Volver a intentar</button>
+        </div>
+      </div>
+
+      <!-- ── PASO: RESULTADO ───────────────────────────────── -->
+      <div id="step-result" class="hidden fade-up">
+
+        <!-- Cabecera resultado -->
+        <div class="sc" style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--orange);margin-bottom:6px;">Análisis completado</div>
+            <h2 id="res-titulo" style="font-size:clamp(17px,3.5vw,24px);font-weight:800;color:var(--brown);line-height:1.25;margin-bottom:8px;"></h2>
+            <p id="res-idea" style="font-size:14px;color:var(--text2);font-style:italic;line-height:1.6;"></p>
+          </div>
+          <button id="btn-nueva" class="btn-secondary" style="flex-shrink:0;">← Nueva</button>
+        </div>
+
+        <!-- Filtros -->
+        <div id="filtros" style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px;"></div>
+
+        <!-- Momentos -->
+        <div class="st" style="margin-bottom:12px;">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z"/></svg>
+          Momentos clave
+        </div>
+        <div id="momentos-list" style="margin-bottom:28px;"></div>
+
+        <!-- Clips recomendados -->
+        <div class="sc">
+          <div class="st">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+            Clips recomendados para redes
+          </div>
+          <div id="clips-list"></div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    const PWD = 'media2026';
+    const KEY_SUPADATA = 'cac-supadata-key';
+
+    const CAT_COLORS = {
+      'Llamada':         '#e8501d',
+      'Revelación':      '#6366f1',
+      'Ilustración':     '#059669',
+      'Versículo clave': '#7c3aed',
+      'Promesa':         '#0284c7',
+      'Desafío':         '#98211e',
+      'Transición':      '#9ca3af',
+    };
+    const CAT_ICONS = {
+      'Llamada':'🔥','Revelación':'💡','Ilustración':'🎯',
+      'Versículo clave':'📖','Promesa':'✨','Desafío':'⚡','Transición':'→',
+    };
+
+    // ── Auth ──────────────────────────────────────────────
+    if (sessionStorage.getItem('cac-auth') === PWD) {
+      document.getElementById('pwd-screen').classList.add('hidden');
+      document.getElementById('app').classList.remove('hidden');
+      initApp();
+    }
+
+    document.getElementById('pwd-btn').addEventListener('click', login);
+    document.getElementById('pwd-in').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+
+    function login() {
+      const v = document.getElementById('pwd-in').value;
+      if (v === PWD) {
+        sessionStorage.setItem('cac-auth', PWD);
+        document.getElementById('pwd-screen').classList.add('hidden');
+        document.getElementById('app').classList.remove('hidden');
+        initApp();
+      } else {
+        document.getElementById('pwd-err').classList.remove('hidden');
+        document.getElementById('pwd-in').value = '';
+        document.getElementById('pwd-in').focus();
+      }
+    }
+
+    // ── App ───────────────────────────────────────────────
+    let currentResult = null;
+    let currentUrl    = '';
+    let activeFilter  = 'Todos';
+
+    function initApp() {
+      const saved = localStorage.getItem(KEY_SUPADATA);
+      if (saved) document.getElementById('inp-key').value = saved;
+
+      // Validación en tiempo real para habilitar el botón
+      const checkBtn = () => {
+        const url = document.getElementById('inp-url').value.trim();
+        const key = document.getElementById('inp-key').value.trim();
+        const valid = /youtube\.com|youtu\.be/.test(url) && key.length > 0;
+        document.getElementById('btn-analyze').disabled = !valid;
+      };
+      document.getElementById('inp-url').addEventListener('input', checkBtn);
+      document.getElementById('inp-key').addEventListener('input', checkBtn);
+
+      document.getElementById('btn-analyze').addEventListener('click', analyze);
+      document.getElementById('btn-retry').addEventListener('click', goInput);
+      document.getElementById('btn-nueva').addEventListener('click', goInput);
+
+      // Acordeón ayuda
+      document.getElementById('help-toggle-btn').addEventListener('click', () => {
+        const body = document.getElementById('help-body');
+        body.classList.toggle('open');
+      });
+    }
+
+    function showStep(name) {
+      ['input','loading','error','result'].forEach(s => {
+        document.getElementById(`step-${s}`).classList.add('hidden');
+      });
+      document.getElementById(`step-${name}`).classList.remove('hidden');
+    }
+
+    function goInput() { showStep('input'); }
+
+    async function analyze() {
+      const url = document.getElementById('inp-url').value.trim();
+      const key = document.getElementById('inp-key').value.trim();
+      if (!url || !key) return;
+
+      localStorage.setItem(KEY_SUPADATA, key);
+      currentUrl = url;
+
+      showStep('loading');
+      setLoading('Obteniendo transcripción…', 'Conectando con Supadata');
+
+      try {
+        // Simula progreso visual mientras se obtiene la transcripción
+        const timer = setTimeout(() => setLoading('Analizando con Claude…', 'Identificando momentos de impacto'), 3000);
+
+        const res = await fetch('/api/analyze-predica', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ youtubeUrl: url, supadataKey: key }),
+        });
+        clearTimeout(timer);
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || `Error ${res.status}`);
+
+        currentResult = data;
+        activeFilter  = 'Todos';
+        renderResult();
+        showStep('result');
+      } catch (e) {
+        document.getElementById('error-msg').textContent = e.message;
+        showStep('error');
+      }
+    }
+
+    function setLoading(title, sub) {
+      document.getElementById('load-title').textContent = title;
+      document.getElementById('load-sub').textContent   = sub;
+    }
+
+    // ── Render resultado ──────────────────────────────────
+    function renderResult() {
+      const r = currentResult;
+      document.getElementById('res-titulo').textContent = r.titulo_alternativo || '';
+      document.getElementById('res-idea').textContent   = `"${r.idea_central || ''}"`;
+
+      // Filtros
+      const cats = ['Todos', ...new Set(r.momentos.map(m => m.categoria))];
+      const filtrosEl = document.getElementById('filtros');
+      filtrosEl.innerHTML = '';
+      cats.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'chip' + (cat === activeFilter ? ' active' : '');
+        btn.textContent = cat === 'Todos'
+          ? `Todos (${r.momentos.length})`
+          : `${CAT_ICONS[cat] || ''} ${cat}`;
+        btn.addEventListener('click', () => { activeFilter = cat; renderResult(); });
+        filtrosEl.appendChild(btn);
+      });
+
+      // Momentos
+      const filtered = r.momentos.filter(m => activeFilter === 'Todos' || m.categoria === activeFilter);
+      const listEl   = document.getElementById('momentos-list');
+      listEl.innerHTML = '';
+      filtered.forEach(m => {
+        const color = CAT_COLORS[m.categoria] || '#e8501d';
+        const icon  = CAT_ICONS[m.categoria]  || '';
+        const tsHref = tsToYtLink(currentUrl, m.timestamp);
+
+        const card = document.createElement('div');
+        card.className = 'momento-card';
+        card.style.setProperty('--cat', color);
+        card.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <span class="cat-badge" style="--cat:${color};">${icon} ${m.categoria}</span>
+              ${m.timestamp ? `<a class="ts-link" href="${tsHref}" target="_blank" rel="noreferrer">
+                <svg style="width:11px;height:11px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/></svg>
+                ${m.timestamp} ↗
+              </a>` : ''}
+            </div>
+            <div style="display:flex;align-items:flex-end;gap:2px;">
+              ${scoreBars(m.puntuacion, color)}
+              <span style="font-size:10px;font-weight:700;color:${color};margin-left:5px;">${m.puntuacion}/10</span>
+            </div>
+          </div>
+          <div class="texto-momento">"${esc(m.texto)}"</div>
+          <div class="razon-momento">↳ ${esc(m.razon)}</div>
+        `;
+        listEl.appendChild(card);
+      });
+
+      // Clips
+      const clipsEl = document.getElementById('clips-list');
+      clipsEl.innerHTML = '';
+      (r.clips_recomendados || []).forEach(c => {
+        const href = tsToYtLink(currentUrl, c.timestamp_inicio);
+        const card = document.createElement('div');
+        card.className = 'clip-card';
+        card.innerHTML = `
+          <div class="clip-header">
+            <span class="clip-num">Clip #${c.numero} · ${esc(c.duracion_estimada)}</span>
+            <a class="ts-link" href="${href}" target="_blank" rel="noreferrer">
+              ${esc(c.timestamp_inicio)} → ${esc(c.timestamp_fin)} ↗
+            </a>
+          </div>
+          <div class="clip-fragmento">"${esc(c.fragmento)}…"</div>
+          <div class="clip-razon">${esc(c.razon)}</div>
+        `;
+        clipsEl.appendChild(card);
+      });
+    }
+
+    // ── Utilidades ────────────────────────────────────────
+    function scoreBars(score, color) {
+      return Array.from({ length: 10 }, (_, i) => {
+        const on = i < score;
+        const h  = 6 + i * 1.2;
+        return `<div class="score-bar" style="height:${h}px;background:${on ? color : '#e5e7eb'};opacity:${on ? 0.4 + (i/10)*.6 : 1};"></div>`;
+      }).join('');
+    }
+
+    function tsToSeconds(ts) {
+      if (!ts) return 0;
+      const parts = ts.split(':').map(Number);
+      if (parts.length === 3) return parts[0]*3600 + parts[1]*60 + parts[2];
+      return parts[0]*60 + (parts[1]||0);
+    }
+
+    function tsToYtLink(url, ts) {
+      const base = url.includes('youtu.be')
+        ? url.replace('youtu.be/', 'youtube.com/watch?v=')
+        : url;
+      return `${base}${base.includes('?') ? '&' : '?'}t=${tsToSeconds(ts)}s`;
+    }
+
+    function esc(s) {
+      if (!s) return '';
+      return String(s)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+  </script>
+</body>
+</html>
