@@ -49,7 +49,7 @@ import '../../styles/theme.css';
     /* ── Bloques ─────────────────────────────────────────── */
     .bh, .br {
       display: grid;
-      grid-template-columns: 76px 1fr 1fr 76px 1fr 80px;
+      grid-template-columns: 76px 1fr 1fr 76px 1fr 96px;
       gap: 6px;
       align-items: start;
     }
@@ -57,6 +57,8 @@ import '../../styles/theme.css';
     .bh span { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #9ca3af; }
     .br { padding: 8px 0; border-bottom: 1px solid #f3f4f6; }
     .br:last-child { border-bottom: none; }
+    .br-act { display: flex; gap: 4px; align-items: flex-start; flex-wrap: nowrap; }
+    .br textarea.fi { resize: none; overflow: hidden; min-height: 36px; line-height: 1.45; }
 
     /* ── Bloques — móvil ─────────────────────────────────── */
     @media (max-width: 639px) {
@@ -460,15 +462,20 @@ import '../../styles/theme.css';
 
     // ── Blocks ────────────────────────────────────────────
 
+    function autoResize(el) {
+      el.style.height = 'auto';
+      el.style.height = el.scrollHeight + 'px';
+    }
+
     function renderBlocks() {
       const list = document.getElementById('blocks-list');
       list.innerHTML = blocks.map((b, i) => `
         <div class="br" data-bi="${i}">
           <input type="text" class="fi b-hora" data-f="hora" value="${x(b.hora)}" placeholder="12:00" />
-          <input type="text" class="fi b-resp" data-f="resp" value="${x(b.resp)}" placeholder="Responsable" />
-          <input type="text" class="fi b-sec"  data-f="sec"  value="${x(b.sec)}"  placeholder="Sección" />
+          <textarea class="fi b-resp" data-f="resp" placeholder="Responsable">${x(b.resp)}</textarea>
+          <textarea class="fi b-sec"  data-f="sec"  placeholder="Sección">${x(b.sec)}</textarea>
           <input type="text" class="fi b-dur"  data-f="dur"  value="${x(b.dur)}"  placeholder="5:00" />
-          <input type="text" class="fi b-not"  data-f="notas" value="${x(b.notas)}" placeholder="Notas" />
+          <textarea class="fi b-not"  data-f="notas" placeholder="Notas">${x(b.notas)}</textarea>
           <div class="br-act">
             <button class="ba b-up"  data-bi="${i}" title="Subir"   ${i===0            ?'disabled':''}>
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/></svg>
@@ -483,10 +490,13 @@ import '../../styles/theme.css';
         </div>
       `).join('');
 
-      list.querySelectorAll('input').forEach(el => {
+      list.querySelectorAll('textarea').forEach(el => autoResize(el));
+
+      list.querySelectorAll('input, textarea').forEach(el => {
         el.addEventListener('input', e => {
           const i = +e.target.closest('[data-bi]').dataset.bi;
           blocks[i][e.target.dataset.f] = e.target.value;
+          if (e.target.tagName === 'TEXTAREA') autoResize(e.target);
           scheduleSave();
         });
       });
