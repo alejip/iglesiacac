@@ -259,7 +259,7 @@ import '../../styles/theme.css';
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
           <div><label class="fl">Fecha</label><input id="g-fecha" type="date" class="fi" /></div>
-          <div><label class="fl">Hora</label><input id="g-hora" type="time" class="fi" value="11:30" /></div>
+          <div><label class="fl">Hora</label><input id="g-hora" type="time" class="fi" value="11:00" /></div>
           <div><label class="fl">Duración estimada</label><input id="g-dur" type="text" class="fi" value="105 min" /></div>
           <div><label class="fl">Dirige</label><input id="g-dirige" type="text" class="fi" placeholder="Nombre" /></div>
           <div><label class="fl">Predica</label><input id="g-predica" type="text" class="fi" placeholder="Nombre" /></div>
@@ -381,7 +381,7 @@ import '../../styles/theme.css';
     ];
 
     const DEFAULT_BLOCKS = [
-      { hora:'11:30', resp:'Grupo Alabanza',     sec:'Alabanza',               dur:'35:00', notas:'El grupo de alabanza inicia el culto 3 min antes si es posible' },
+      { hora:'11:00', resp:'Grupo Alabanza',     sec:'Alabanza',               dur:'35:00', notas:'El grupo de alabanza inicia el culto 3 min antes si es posible' },
       { hora:'12:05', resp:'Dirección',           sec:'Participación',          dur:'10:00', notas:'Saludos y presentaciones / Dar paso a Comisión Dale 5 a Jesús / Oración por los niños' },
       { hora:'12:15', resp:'Responsable',         sec:'Presentación campaña',   dur:'5:00',  notas:'Presenta a la comisión e informan de la campaña' },
       { hora:'12:20', resp:'Dirección',           sec:'Ofrenda',                dur:'5:00',  notas:'' },
@@ -610,7 +610,7 @@ import '../../styles/theme.css';
         const s = JSON.parse(raw);
         if (s.g) {
           document.getElementById('g-fecha').value   = s.g.fecha   || '';
-          document.getElementById('g-hora').value    = s.g.hora    || '11:30';
+          document.getElementById('g-hora').value    = s.g.hora    || '11:00';
           document.getElementById('g-dur').value     = s.g.dur     || '105 min';
           document.getElementById('g-dirige').value  = s.g.dirige  || '';
           document.getElementById('g-predica').value = s.g.predica || '';
@@ -682,7 +682,7 @@ import '../../styles/theme.css';
       const s = item.data;
       if (s.g) {
         document.getElementById('g-fecha').value    = s.g.fecha    || '';
-        document.getElementById('g-hora').value     = s.g.hora     || '11:30';
+        document.getElementById('g-hora').value     = s.g.hora     || '11:00';
         document.getElementById('g-dur').value      = s.g.dur      || '105 min';
         document.getElementById('g-dirige').value   = s.g.dirige   || '';
         document.getElementById('g-predica').value  = s.g.predica  || '';
@@ -732,7 +732,7 @@ import '../../styles/theme.css';
     document.getElementById('btn-save-named').addEventListener('click', () => {
       const g = collect().g;
       const def = g.fecha
-        ? `${g.hora||'11:30'} · ${fmtDate(g.fecha)}`
+        ? `${g.hora||'11:00'} · ${fmtDate(g.fecha)}`
         : `Escaleta ${new Date().toLocaleDateString('es-ES')}`;
       const name = prompt('Nombre para esta escaleta:', def);
       if (!name?.trim()) return;
@@ -745,7 +745,7 @@ import '../../styles/theme.css';
       ['g-fecha','g-dirige','g-predica','g-coordina','g-titulo','g-texto','g-obs'].forEach(id => {
         document.getElementById(id).value = '';
       });
-      document.getElementById('g-hora').value = '11:30';
+      document.getElementById('g-hora').value = '11:00';
       document.getElementById('g-dur').value  = '105 min';
       document.querySelectorAll('.eq-in').forEach(el => el.value = '');
       document.querySelectorAll('.ck').forEach(el => el.checked = false);
@@ -881,7 +881,7 @@ import '../../styles/theme.css';
             <div style="background:#401c14;border-radius:14px;padding:13px 18px;margin-bottom:10px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;">
               <div>
                 <div style="font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:4px;">Escaleta · Culto CAC · MEDIA Interno</div>
-                <h1 style="font-size:18px;font-weight:800;color:white;margin:0;line-height:1.2;">Domingo Mañana · ${e(fecha)} · ${e(g.hora||'11:30')} h</h1>
+                <h1 style="font-size:18px;font-weight:800;color:white;margin:0;line-height:1.2;">Domingo Mañana · ${e(fecha)} · ${e(g.hora||'11:00')} h</h1>
                 ${predInHeader}
               </div>
               <div style="display:flex;gap:7px;flex-wrap:wrap;">${chips}</div>
