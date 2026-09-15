@@ -11,6 +11,7 @@ export default defineConfig({
   integrations: [
     tailwind(),
     sitemap({
+      filter: (page) => page !== 'https://iglesiacac.es/dale-5/',
       lastmod: new Date(),
       serialize(item) {
         // Prioridades personalizadas por página
